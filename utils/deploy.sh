@@ -4,5 +4,13 @@ set -e
 
 hugo
 HASH=$(ipfs add -qr public | tail -n 1)
-ssh meico@206.189.70.13 ipfs pin add -r $HASH
-ssh meico@206.189.70.13 ipfs name publish $HASH
+ssh meico@meico.dance /bin/bash << EOF
+    set -e
+    ipfs get -o ~/www-$HASH /ipfs/$HASH
+    ipfs pin add -r $HASH
+    ipfs name publish $HASH
+    [ -e '~/www' ] && mv ~/www ~/www-pre-$HASH
+    mv ~/www-$HASH ~/www
+    [ -e "~/www-pre-$HASH" ] && rm -r ~/www-pre-$HASH
+EOF
+echo Deployed $HASH
