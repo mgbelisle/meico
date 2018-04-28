@@ -5,7 +5,7 @@ set -e
 hugo
 HASH=$(ipfs add -qr public | tail -n 1)
 NS=$(ssh meico@meico.dance "ipfs id -f='<id>'")
-TIMESTAMP=$(date +%s%N)
+TIMESTAMP=$(date +%s)
 ipfs swarm connect /dnsaddr/meico.dance/ipfs/$NS
 ssh meico@meico.dance /bin/bash << EOF
     set -e
