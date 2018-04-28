@@ -3,7 +3,7 @@
 set -e
 
 echo 'Building ...'
-hugo --quiet
+hugo
 echo 'Adding to IPFS ...'
 HASH=$(ipfs add -qr public | tail -n 1)
 ipfs swarm connect /ip6/2604:a880:2:d0::741:7001/tcp/4001/ipfs/QmY3p5zRK9obUETPowTMeU7ceDmyPyQGrVwguWffBb9rMM # TODO: Better address
