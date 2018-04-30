@@ -2,6 +2,7 @@
 
 set -e
 
+rm -rf public
 hugo
 HASH=$(ipfs add -qr public | tail -n 1)
 NS=$(ssh meico@meico.dance "ipfs id -f='<id>'")

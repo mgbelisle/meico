@@ -1,0 +1,27 @@
+{{ $featured_image := .Params.featured_image }}
+{{ if $featured_image }}
+  <img src="{{ $featured_image }}" id="featured-image-img" style="display: none;" />
+  <header class="cover bg-top" id="featured-image-header">
+    <div class="pb3-m pb6-l bg-black-60">
+      {{ partial "site-navigation.html" . }}
+      <div class="tc-l pv6 ph3 ph4-ns">
+        <h1 class="f2 f1-l fw2 white-90 mb0 lh-title">{{ .Title | default .Site.Title }}</h1>
+        {{ with .Params.description  }}
+          <h2 class="fw1 f5 f3-l white-80 measure-wide-l center lh-copy mt3 mb4">
+            {{ . }}
+          </h2>
+        {{ end }}
+      </div>
+    </div>
+  </header>
+  <script>
+    {{/* Ugly hack because of relative urls */}}
+    document.getElementById('featured-image-header').setAttribute('style', 'background-image: url(' + document.getElementById('featured-image-img').getAttribute('src') + ')');
+  </script>
+{{ else }}
+  <header>
+    <div class="{{ .Site.Params.background_color_class | default "bg-black" }}">
+      {{ partial "site-navigation.html" . }}
+    </div>
+  </header>
+{{ end }}
