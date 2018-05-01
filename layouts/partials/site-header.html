@@ -18,7 +18,7 @@
   </header>
   <script>
     {{/* Ugly hack because of relative urls */}}
-    document.getElementById('featured-image-header').setAttribute('style', 'background-image: url(' + document.getElementById('featured-image-img').getAttribute('src') + ')');
+    document.getElementById('featured-image-header').setAttribute('style', 'background-image: url(' + document.getElementById('featured-image-img').getAttribute('src') + '); background-position: right bottom;');
   </script>
 {{ else }}
   <header>
