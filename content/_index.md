@@ -1,6 +1,4 @@
 ---
-# title: "Ananke: a Hugo Theme"
-# featured_image: '/img/gohugo-default-sample-hero-image.jpg'
-description: "Meico Dance description 2"
+description: "Mei/Co description"
 ---
 Mei/Co Dance is going to be awesome.
