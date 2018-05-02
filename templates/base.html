@@ -4,6 +4,10 @@
     <title>{% block title %}Ad Deum Dance{% endblock %}</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {{ block "css" . }}
+    <link rel="stylesheet" type="text/css" href="{{ .RootURL }}/bootstrap-4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ .RootURL }}/css/styles.css">
+    {{ end }}
   </head>
   <body>
     {{ block "body" . }}

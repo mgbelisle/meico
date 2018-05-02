@@ -53,7 +53,9 @@ func main() {
 	}
 
 	// Build once
-	build(errLogger.Panic)
+	build(func(err error) {
+		errLogger.Panic(err)
+	})
 
 	// Serve at addr if provided
 	wg := sync.WaitGroup{}
@@ -91,7 +93,9 @@ func main() {
 				}
 			}
 			if rebuild {
-				build(errLogger.Print)
+				build(func(err error) {
+					errLogger.Print(err)
+				})
 			}
 			time.Sleep(time.Second)
 		}
@@ -100,29 +104,32 @@ func main() {
 	wg.Wait()
 }
 
-func build(logFunc func(...interface{})) {
+func build(errLogFunc func(error)) {
 	// Templates setup
-	tmpl := template.Must(template.ParseGlob(filepath.Join(*templatesFlag, "**")))
+	tmpl, err := template.ParseGlob(filepath.Join(*templatesFlag, "**"))
+	if err != nil {
+		errLogFunc(err)
+	}
 
 	// Render the files
 	if err := os.RemoveAll(*outFlag); err != nil {
-		logFunc(err)
+		errLogFunc(err)
 	}
 	wg := sync.WaitGroup{}
 	if err := filepath.Walk(*inFlag, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
-			logFunc(err)
+			errLogFunc(err)
 		}
 		rel, err := filepath.Rel(*inFlag, path)
 		if err != nil {
-			logFunc(err)
+			errLogFunc(err)
 		}
 		outPath := filepath.Join(*outFlag, rel)
 		if info.IsDir() {
 			// Make the dir
 			verboseLogger.Printf("Creating %s", outPath)
 			if err := os.Mkdir(outPath, info.Mode()); err != nil {
-				logFunc(err)
+				errLogFunc(err)
 			}
 		} else {
 			// Otherwise parse the file or copy it, whichever is appropriate.
@@ -132,41 +139,41 @@ func build(logFunc func(...interface{})) {
 				defer wg.Add(-1)
 				outFile, err := os.OpenFile(outPath, os.O_WRONLY|os.O_CREATE, info.Mode())
 				if err != nil {
-					logFunc(err)
+					errLogFunc(err)
 				}
 				defer outFile.Close()
 				rootPath, err := filepath.Rel(path, *inFlag)
 				if err != nil {
-					logFunc(err)
+					errLogFunc(err)
 				}
 				if filepath.Ext(path) == ".html" {
 					verboseLogger.Printf("Parsing %s", path)
 					tmpl2, err := tmpl.Clone()
 					if err != nil {
-						logFunc(err)
+						errLogFunc(err)
 					}
 					tmpl2 = template.Must(tmpl2.ParseFiles(path))
 					if err := tmpl2.Execute(outFile, &TemplateData{
 						RootURL: filepath.ToSlash(rootPath),
 					}); err != nil {
-						logFunc(err)
+						errLogFunc(err)
 					}
 				} else {
 					verboseLogger.Printf("Copying %s", path)
 					inFile, err := os.Open(path)
 					if err != nil {
-						logFunc(err)
+						errLogFunc(err)
 					}
 					defer inFile.Close()
 					if _, err := io.Copy(outFile, inFile); err != nil {
-						logFunc(err)
+						errLogFunc(err)
 					}
 				}
 			}(path, outPath, info)
 		}
 		return nil
 	}); err != nil {
-		logFunc(err)
+		errLogFunc(err)
 	}
 	wg.Wait()
 }
