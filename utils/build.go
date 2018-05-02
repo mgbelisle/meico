@@ -11,7 +11,7 @@ import (
 	"path/filepath"
 )
 
-var usagePrefix = fmt.Sprintf(`Builds a static site using the html/template package
+var usagePrefix = fmt.Sprintf(`Builds a static site using the html/template package, with TemplateData provided.
 
 Usage: %s [OPTIONS]
 
