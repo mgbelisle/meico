@@ -103,19 +103,23 @@ func main() {
 			prevModTime := time.Now()
 			for {
 				rebuild := false
-				for _, path := range []string{*inFlag, *templatesFlag} {
-					if err := filepath.Walk(path, func(path string, info os.FileInfo, err error) error {
+				for _, glob := range append([]string{filepath.Join(*inFlag, "**")}, strings.Fields(*templatesFlag)...) {
+					paths, err := filepath.Glob(glob)
+					if err != nil {
+						errLogger.Print(err)
+						break
+					}
+					for _, path := range paths {
+						info, err := os.Stat(path)
 						if err != nil {
-							errLogger.Panic(err)
+							errLogger.Print(err)
+							break
 						}
 						if info.ModTime().After(prevModTime) {
 							verboseLogger.Printf("Change detected in %s", path)
 							rebuild = true
 							prevModTime = info.ModTime()
 						}
-						return nil
-					}); err != nil {
-						errLogger.Panic(err)
 					}
 				}
 				if rebuild {
