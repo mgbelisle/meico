@@ -146,7 +146,7 @@ func build(errLogFunc func(error)) {
 					return
 				}
 				defer outFile.Close()
-				rootPath, err := filepath.Rel(path, *inFlag)
+				rootPath, err := filepath.Rel(filepath.Dir(path), *inFlag)
 				if err != nil {
 					errLogFunc(err)
 					return
