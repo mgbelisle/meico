@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"html/template"
+	"io"
 	"io/ioutil"
 	"log"
 	"os"
@@ -42,7 +43,9 @@ func main() {
 	tmpl := template.Must(template.ParseGlob(filepath.Join(*templatesFlag, "**")))
 
 	// Render the files
-	os.RemoveAll(*outFlag)
+	if err := os.RemoveAll(*outFlag); err != nil {
+		log.Panic(err)
+	}
 	if err := filepath.Walk(*inFlag, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			log.Panic(err)
@@ -52,33 +55,39 @@ func main() {
 			log.Panic(err)
 		}
 		outPath := filepath.Join(*outFlag, rel)
-		if err := os.MkdirAll(filepath.Dir(outPath), 0700); err != nil {
-			log.Panic(err)
-		}
-		outFile, err := os.OpenFile(outPath, os.O_WRONLY|os.O_CREATE, info.Mode())
-		if err != nil {
-			log.Panic(err)
-		}
-		defer outFile.Close()
-		if !info.IsDir() && filepath.Ext(path) == ".html" {
-			verboseLogger.Printf("Parsing %s", path)
-			tmpl2, err := tmpl.Clone()
-			if err != nil {
-				log.Panic(err)
-			}
-			tmpl2 = template.Must(tmpl2.ParseFiles(path))
-			if err := tmpl2.Execute(outFile, nil); err != nil {
+		if info.IsDir() {
+			// Make the dir
+			verboseLogger.Printf("Creating %s", outPath)
+			if err := os.Mkdir(outPath, info.Mode()); err != nil {
 				log.Panic(err)
 			}
 		} else {
-			verboseLogger.Printf("Copying %s", path)
-			inFile, err := os.Open(path)
+			// Otherwise parse the file or copy it, whichever is appropriate
+			outFile, err := os.OpenFile(outPath, os.O_WRONLY|os.O_CREATE, info.Mode())
 			if err != nil {
 				log.Panic(err)
 			}
-			defer inFile.Close()
-			if _, err := io.Copy(outFile, inFile); err != nil {
-				log.Panic(err)
+			defer outFile.Close()
+			if filepath.Ext(path) == ".html" {
+				verboseLogger.Printf("Parsing %s", path)
+				tmpl2, err := tmpl.Clone()
+				if err != nil {
+					log.Panic(err)
+				}
+				tmpl2 = template.Must(tmpl2.ParseFiles(path))
+				if err := tmpl2.Execute(outFile, nil); err != nil {
+					log.Panic(err)
+				}
+			} else {
+				verboseLogger.Printf("Copying %s", path)
+				inFile, err := os.Open(path)
+				if err != nil {
+					log.Panic(err)
+				}
+				defer inFile.Close()
+				if _, err := io.Copy(outFile, inFile); err != nil {
+					log.Panic(err)
+				}
 			}
 		}
 		return nil
