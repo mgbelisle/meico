@@ -11,6 +11,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
 	"sync"
 	"time"
 )
@@ -125,32 +126,30 @@ func main() {
 }
 
 func build(errLogFunc func(error)) {
-	var tmpl *template.Template
 	// Templates setup
-	for _, glob in strings.Fields(*templatesFlag) {
+	var tmpl *template.Template
+	for _, glob := range strings.Fields(*templatesFlag) {
 		paths, err := filepath.Glob(glob)
 		if err != nil {
 			errLogFunc(err)
 			return
 		}
-		if tmpl == nil && 0 < len(paths) {
-			tmpl = template.New(paths[0])
+		verboseLogger.Printf("Parsing templates: %v", paths)
+		if tmpl == nil {
+			if 0 < len(paths) {
+				tmpl, err = template.New(filepath.Base(paths[0])).Funcs(TemplateFuncs).ParseFiles(paths...)
+				if err != nil {
+					errLogFunc(err)
+					return
+				}
+			}
 		} else {
-			for _, path := range paths {
-				tmpl = tmpl.New(path)
+			tmpl, err = tmpl.ParseFiles(paths...)
+			if err != nil {
+				errLogFunc(err)
+				return
 			}
 		}
-	}
-	if tmpl == nil {
-		errLogFunc(errors.New("No templates found"))
-		return
-	}
-	tmpl = tmpl.Funcs(TemplateFuncs)
-	var err error
-	tmpl, err = 
-	if err != nil {
-		errLogFunc(err)
-		return
 	}
 
 	// Render the files
@@ -170,12 +169,12 @@ func build(errLogFunc func(error)) {
 		outPath := filepath.Join(*outFlag, relPath)
 		if info.IsDir() {
 			// Make the dir
-			verboseLogger.Printf("Creating %s", outPath)
+			verboseLogger.Printf("Creating dir: %s", outPath)
 			if err := os.Mkdir(outPath, info.Mode()); err != nil {
 				return err
 			}
 		} else {
-			// Otherwise parse the file or copy it, whichever is appropriate.
+			// Otherwise execute the template or copy the file, whichever is appropriate.
 			// Do them all in parallel
 			wg.Add(1)
 			go func(path string, outPath string, info os.FileInfo) {
@@ -191,8 +190,8 @@ func build(errLogFunc func(error)) {
 					errLogFunc(err)
 					return
 				}
-				if filepath.Ext(path) == ".html" {
-					verboseLogger.Printf("Parsing %s", path)
+				if tmpl != nil && filepath.Ext(path) == ".html" {
+					verboseLogger.Printf("Executing template: %s", path)
 					tmpl2, err := tmpl.Clone()
 					if err != nil {
 						errLogFunc(err)
@@ -211,7 +210,7 @@ func build(errLogFunc func(error)) {
 						return
 					}
 				} else {
-					verboseLogger.Printf("Copying %s", path)
+					verboseLogger.Printf("Copying file: %s", path)
 					inFile, err := os.Open(path)
 					if err != nil {
 						errLogFunc(err)
