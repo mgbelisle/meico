@@ -11,6 +11,7 @@ import (
 	"os"
 	"path/filepath"
 	"sync"
+	"time"
 )
 
 var usagePrefix = fmt.Sprintf(`Builds a static site using the html/template package, with TemplateData provided.
@@ -33,8 +34,9 @@ type TemplateData struct {
 }
 
 var (
-	verboseLogger = log.New(ioutil.Discard, os.Args[0]+": ", log.LstdFlags)
-	errLogger     = log.New(os.Stderr, os.Args[0]+": ", log.LstdFlags)
+	logPrefix     = os.Args[0] + ": "
+	verboseLogger = log.New(ioutil.Discard, logPrefix, log.LstdFlags)
+	errLogger     = log.New(os.Stderr, logPrefix, log.LstdFlags)
 )
 
 func main() {
@@ -47,7 +49,7 @@ func main() {
 
 	// Logger setup
 	if *verboseFlag {
-		verboseLogger = log.New(os.Stdout, os.Args[0], log.LstdFlags)
+		verboseLogger = log.New(os.Stdout, logPrefix, log.LstdFlags)
 	}
 
 	// Build once
@@ -63,6 +65,35 @@ func main() {
 			if err := http.ListenAndServe(*addrFlag, http.FileServer(http.Dir(*outFlag))); err != nil {
 				errLogger.Panic(err)
 			}
+		}
+	}()
+
+	// Listen for changes
+	wg.Add(1)
+	go func() {
+		wg.Add(-1)
+		prevModTime := time.Now()
+		for {
+			rebuild := false
+			for _, path := range []string{*inFlag, *templatesFlag} {
+				if err := filepath.Walk(path, func(path string, info os.FileInfo, err error) error {
+					if err != nil {
+						errLogger.Panic(err)
+					}
+					if info.ModTime().After(prevModTime) {
+						verboseLogger.Printf("Change detected in %s", path)
+						rebuild = true
+						prevModTime = info.ModTime()
+					}
+					return nil
+				}); err != nil {
+					errLogger.Panic(err)
+				}
+			}
+			if rebuild {
+				build(errLogger.Print)
+			}
+			time.Sleep(time.Second)
 		}
 	}()
 
