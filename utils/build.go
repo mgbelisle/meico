@@ -25,6 +25,10 @@ var (
 	verboseFlag   = flag.Bool("verbose", false, "Verbose output")
 )
 
+type TemplateData struct {
+	Root string // Relative path to the root url (e.g. "../..")
+}
+
 func main() {
 	// Flag setup
 	flag.Usage = func() {
@@ -79,9 +83,7 @@ func main() {
 					log.Panic(err)
 				}
 				tmpl2 = template.Must(tmpl2.ParseFiles(path))
-				if err := tmpl2.Execute(outFile, &struct {
-					Root string
-				}{
+				if err := tmpl2.Execute(outFile, &TemplateData{
 					Root: root,
 				}); err != nil {
 					log.Panic(err)
