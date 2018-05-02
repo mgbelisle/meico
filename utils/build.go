@@ -30,7 +30,7 @@ var (
 )
 
 type TemplateData struct {
-	Root string // Relative path to the root url (e.g. "../..")
+	RootURL string // Relative path to the root url (e.g. "../..")
 }
 
 var (
@@ -135,7 +135,7 @@ func build(logFunc func(...interface{})) {
 					logFunc(err)
 				}
 				defer outFile.Close()
-				root, err := filepath.Rel(path, *inFlag)
+				rootPath, err := filepath.Rel(path, *inFlag)
 				if err != nil {
 					logFunc(err)
 				}
@@ -147,7 +147,7 @@ func build(logFunc func(...interface{})) {
 					}
 					tmpl2 = template.Must(tmpl2.ParseFiles(path))
 					if err := tmpl2.Execute(outFile, &TemplateData{
-						Root: root,
+						RootURL: filepath.ToSlash(rootPath),
 					}); err != nil {
 						logFunc(err)
 					}
