@@ -52,6 +52,12 @@ var TemplateFuncs = template.FuncMap{
 		}
 		return dict, nil
 	},
+	"string": func(value interface{}) (string, error) {
+		if value, ok := value.(string); ok {
+			return value, nil
+		}
+		return "", fmt.Errorf("Not a string: %v (%T)", value, value)
+	},
 }
 
 var (
