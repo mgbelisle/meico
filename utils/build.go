@@ -68,6 +68,10 @@ func main() {
 				log.Panic(err)
 			}
 			defer outFile.Close()
+			root, err := filepath.Rel(path, *inFlag)
+			if err != nil {
+				log.Panic(err)
+			}
 			if filepath.Ext(path) == ".html" {
 				verboseLogger.Printf("Parsing %s", path)
 				tmpl2, err := tmpl.Clone()
@@ -75,7 +79,11 @@ func main() {
 					log.Panic(err)
 				}
 				tmpl2 = template.Must(tmpl2.ParseFiles(path))
-				if err := tmpl2.Execute(outFile, nil); err != nil {
+				if err := tmpl2.Execute(outFile, &struct {
+					Root string
+				}{
+					Root: root,
+				}); err != nil {
 					log.Panic(err)
 				}
 			} else {
