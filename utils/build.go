@@ -32,8 +32,8 @@ type TemplateData struct {
 }
 
 var (
-	verboseLogger = log.New(ioutil.Discard, os.Args[0], log.LstdFlags)
-	errLogger     = log.New(os.Stderr, os.Args[0], log.LstdFlags)
+	verboseLogger = log.New(ioutil.Discard, os.Args[0]+": ", log.LstdFlags)
+	errLogger     = log.New(os.Stderr, os.Args[0]+": ", log.LstdFlags)
 )
 
 func main() {
