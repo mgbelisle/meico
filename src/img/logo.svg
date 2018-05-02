@@ -6,4 +6,7 @@
 	fill="white"
 	stroke="grey"
 	stroke-width="4" />
+  <text x="25" y="70" font-family="Verdana" font-size="50" fill="grey">
+    明
+  </text>
 </svg>
