@@ -42,10 +42,24 @@ func main() {
 	tmpl := template.Must(template.ParseGlob(filepath.Join(*templatesFlag, "**")))
 
 	// Render the files
+	os.RemoveAll(*outFlag)
 	if err := filepath.Walk(*inFlag, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			log.Panic(err)
 		}
+		rel, err := filepath.Rel(*inFlag, path)
+		if err != nil {
+			log.Panic(err)
+		}
+		outPath := filepath.Join(*outFlag, rel)
+		if err := os.MkdirAll(filepath.Dir(outPath), 0700); err != nil {
+			log.Panic(err)
+		}
+		outFile, err := os.OpenFile(outPath, os.O_WRONLY|os.O_CREATE, info.Mode())
+		if err != nil {
+			log.Panic(err)
+		}
+		defer outFile.Close()
 		if !info.IsDir() && filepath.Ext(path) == ".html" {
 			verboseLogger.Printf("Parsing %s", path)
 			tmpl2, err := tmpl.Clone()
@@ -53,11 +67,19 @@ func main() {
 				log.Panic(err)
 			}
 			tmpl2 = template.Must(tmpl2.ParseFiles(path))
-			if err := tmpl2.Execute(os.Stdout, nil); err != nil {
+			if err := tmpl2.Execute(outFile, nil); err != nil {
 				log.Panic(err)
 			}
 		} else {
-			verboseLogger.Printf("Skipping %s", path)
+			verboseLogger.Printf("Copying %s", path)
+			inFile, err := os.Open(path)
+			if err != nil {
+				log.Panic(err)
+			}
+			defer inFile.Close()
+			if _, err := io.Copy(outFile, inFile); err != nil {
+				log.Panic(err)
+			}
 		}
 		return nil
 	}); err != nil {
