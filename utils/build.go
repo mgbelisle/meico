@@ -109,27 +109,29 @@ func build(errLogFunc func(error)) {
 	tmpl, err := template.ParseGlob(filepath.Join(*templatesFlag, "**"))
 	if err != nil {
 		errLogFunc(err)
+		return
 	}
 
 	// Render the files
 	if err := os.RemoveAll(*outFlag); err != nil {
 		errLogFunc(err)
+		return
 	}
 	wg := sync.WaitGroup{}
 	if err := filepath.Walk(*inFlag, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
-			errLogFunc(err)
+			return err
 		}
 		rel, err := filepath.Rel(*inFlag, path)
 		if err != nil {
-			errLogFunc(err)
+			return err
 		}
 		outPath := filepath.Join(*outFlag, rel)
 		if info.IsDir() {
 			// Make the dir
 			verboseLogger.Printf("Creating %s", outPath)
 			if err := os.Mkdir(outPath, info.Mode()); err != nil {
-				errLogFunc(err)
+				return err
 			}
 		} else {
 			// Otherwise parse the file or copy it, whichever is appropriate.
@@ -140,33 +142,43 @@ func build(errLogFunc func(error)) {
 				outFile, err := os.OpenFile(outPath, os.O_WRONLY|os.O_CREATE, info.Mode())
 				if err != nil {
 					errLogFunc(err)
+					return
 				}
 				defer outFile.Close()
 				rootPath, err := filepath.Rel(path, *inFlag)
 				if err != nil {
 					errLogFunc(err)
+					return
 				}
 				if filepath.Ext(path) == ".html" {
 					verboseLogger.Printf("Parsing %s", path)
 					tmpl2, err := tmpl.Clone()
 					if err != nil {
 						errLogFunc(err)
+						return
 					}
-					tmpl2 = template.Must(tmpl2.ParseFiles(path))
+					tmpl2, err = tmpl2.ParseFiles(path)
+					if err != nil {
+						errLogFunc(err)
+						return
+					}
 					if err := tmpl2.Execute(outFile, &TemplateData{
 						RootURL: filepath.ToSlash(rootPath),
 					}); err != nil {
 						errLogFunc(err)
+						return
 					}
 				} else {
 					verboseLogger.Printf("Copying %s", path)
 					inFile, err := os.Open(path)
 					if err != nil {
 						errLogFunc(err)
+						return
 					}
 					defer inFile.Close()
 					if _, err := io.Copy(outFile, inFile); err != nil {
 						errLogFunc(err)
+						return
 					}
 				}
 			}(path, outPath, info)
@@ -174,6 +186,7 @@ func build(errLogFunc func(error)) {
 		return nil
 	}); err != nil {
 		errLogFunc(err)
+		return
 	}
 	wg.Wait()
 }
