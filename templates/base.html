@@ -13,7 +13,7 @@
     {{ block "body" . }}
     {{ block "header" . }}
     <header>
-      <nav class="navbar navbar-fixed-top navbar-expand-lg navbar-dark bg-dark">
+      <nav class="navbar navbar-fixed-top navbar-expand-lg navbar-light">
 	<a class="navbar-brand" href="{{ .RootURL }}"><img src="{{ .RootURL }}/img/logo.svg" height="80px" alt="logo" /></a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
 	  <span class="navbar-toggler-icon"></span>
@@ -25,8 +25,10 @@
 	  </ul>
 	</div>
       </nav>
+      <img src="{{ .RootURL }}/img/hero.jpg" alt="hero.jpg" class="w-100" />
     </header>
     {{ end }}
+    next
     {{ end }}
   </body>
 </html>
