@@ -7,6 +7,7 @@ import (
 	"io"
 	"io/ioutil"
 	"log"
+	"net/http"
 	"os"
 	"path/filepath"
 	"sync"
@@ -51,6 +52,21 @@ func main() {
 
 	// Build once
 	build(errLogger.Panic)
+
+	// Serve at addr if provided
+	wg := sync.WaitGroup{}
+	wg.Add(1)
+	go func() {
+		defer wg.Add(-1)
+		if *addrFlag != "" {
+			verboseLogger.Printf("Serving %s on %s", *outFlag, *addrFlag)
+			if err := http.ListenAndServe(*addrFlag, http.FileServer(http.Dir(*outFlag))); err != nil {
+				errLogger.Panic(err)
+			}
+		}
+	}()
+
+	wg.Wait()
 }
 
 func build(logFunc func(...interface{})) {
