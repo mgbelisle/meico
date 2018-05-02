@@ -17,5 +17,5 @@ go run utils/build.go
 ## Resources
 
 * https://ipfs.io
-* https://gohugo.io
+* https://golang.org
 * https://www.nginx.com
