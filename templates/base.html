@@ -29,7 +29,16 @@
     </header>
     <img src="{{ .RootURL }}/img/hero.jpg" alt="hero.jpg" class="w-100" />
     {{ end }}
-    next
+    {{ block "main" . }}
+    <main class="container">
+      {{ block "content" . }}<h1>Content</h1>{{ end }}
+    </main>
+    {{ end }}
+    {{ block "script" . }}
+    <script src="{{ .RootURL }}/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="{{ .RootURL }}/bootstrap-4.0.0/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ .RootURL }}/js/main.js"></script>
+    {{ end }}
     {{ end }}
   </body>
 </html>
