@@ -20,6 +20,7 @@
 	</button>
 	<div class="collapse navbar-collapse" id="navbar-content">
 	  <ul class="navbar-nav ml-auto mr-3">
+	    {{ template "nav-item" (dict "Parent" . "URL" "/" "Path" "index.html" "Text" "Home") }}
 	    {{ template "nav-item" (dict "Parent" . "URL" "/about/" "Path" "about/index.html" "Text" "About") }}
 	    {{ template "nav-item" (dict "Parent" . "URL" "/contact/" "Path" "contact/index.html" "Text" "Contact") }}
 	  </ul>
