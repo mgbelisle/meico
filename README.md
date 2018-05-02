@@ -5,7 +5,7 @@ Source code for https://meico.dance
 ## Local dev
 
 ```sh
-hugo server -D
+go run utils/build.go
 ```
 
 ## Deployment
