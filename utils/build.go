@@ -9,6 +9,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"sync"
 )
 
 var usagePrefix = fmt.Sprintf(`Builds a static site using the html/template package, with TemplateData provided.
@@ -23,7 +24,7 @@ var (
 	outFlag       = flag.String("out", "www", "Output dir")
 	templatesFlag = flag.String("templates", "templates", "Templates dir")
 	verboseFlag   = flag.Bool("verbose", false, "Verbose output")
-	addrFlag      = flag.String("addr", "", "Address to serve output dir")
+	addrFlag      = flag.String("addr", "", "Address to serve output dir, if provided")
 )
 
 type TemplateData struct {
@@ -60,6 +61,7 @@ func build(logFunc func(...interface{})) {
 	if err := os.RemoveAll(*outFlag); err != nil {
 		logFunc(err)
 	}
+	wg := sync.WaitGroup{}
 	if err := filepath.Walk(*inFlag, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			logFunc(err)
@@ -76,42 +78,48 @@ func build(logFunc func(...interface{})) {
 				logFunc(err)
 			}
 		} else {
-			// Otherwise parse the file or copy it, whichever is appropriate
-			outFile, err := os.OpenFile(outPath, os.O_WRONLY|os.O_CREATE, info.Mode())
-			if err != nil {
-				logFunc(err)
-			}
-			defer outFile.Close()
-			root, err := filepath.Rel(path, *inFlag)
-			if err != nil {
-				logFunc(err)
-			}
-			if filepath.Ext(path) == ".html" {
-				verboseLogger.Printf("Parsing %s", path)
-				tmpl2, err := tmpl.Clone()
+			// Otherwise parse the file or copy it, whichever is appropriate.
+			// Do them all in parallel
+			wg.Add(1)
+			go func(path string, outPath string, info os.FileInfo) {
+				defer wg.Add(-1)
+				outFile, err := os.OpenFile(outPath, os.O_WRONLY|os.O_CREATE, info.Mode())
 				if err != nil {
 					logFunc(err)
 				}
-				tmpl2 = template.Must(tmpl2.ParseFiles(path))
-				if err := tmpl2.Execute(outFile, &TemplateData{
-					Root: root,
-				}); err != nil {
-					logFunc(err)
-				}
-			} else {
-				verboseLogger.Printf("Copying %s", path)
-				inFile, err := os.Open(path)
+				defer outFile.Close()
+				root, err := filepath.Rel(path, *inFlag)
 				if err != nil {
 					logFunc(err)
 				}
-				defer inFile.Close()
-				if _, err := io.Copy(outFile, inFile); err != nil {
-					logFunc(err)
+				if filepath.Ext(path) == ".html" {
+					verboseLogger.Printf("Parsing %s", path)
+					tmpl2, err := tmpl.Clone()
+					if err != nil {
+						logFunc(err)
+					}
+					tmpl2 = template.Must(tmpl2.ParseFiles(path))
+					if err := tmpl2.Execute(outFile, &TemplateData{
+						Root: root,
+					}); err != nil {
+						logFunc(err)
+					}
+				} else {
+					verboseLogger.Printf("Copying %s", path)
+					inFile, err := os.Open(path)
+					if err != nil {
+						logFunc(err)
+					}
+					defer inFile.Close()
+					if _, err := io.Copy(outFile, inFile); err != nil {
+						logFunc(err)
+					}
 				}
-			}
+			}(path, outPath, info)
 		}
 		return nil
 	}); err != nil {
 		logFunc(err)
 	}
+	wg.Wait()
 }
