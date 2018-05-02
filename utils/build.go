@@ -30,7 +30,8 @@ var (
 )
 
 type TemplateData struct {
-	RootURL string // Relative path to the root url (e.g. "../..")
+	RootURL string // Relative path to the root url, relative to --in (e.g. "../..")
+	Path    string // Relative path of the file being parsed, relative to --in (e.g. "contact/index.html")
 }
 
 var (
@@ -122,11 +123,11 @@ func build(errLogFunc func(error)) {
 		if err != nil {
 			return err
 		}
-		rel, err := filepath.Rel(*inFlag, path)
+		relPath, err := filepath.Rel(*inFlag, path)
 		if err != nil {
 			return err
 		}
-		outPath := filepath.Join(*outFlag, rel)
+		outPath := filepath.Join(*outFlag, relPath)
 		if info.IsDir() {
 			// Make the dir
 			verboseLogger.Printf("Creating %s", outPath)
@@ -164,6 +165,7 @@ func build(errLogFunc func(error)) {
 					}
 					if err := tmpl2.Execute(outFile, &TemplateData{
 						RootURL: filepath.ToSlash(rootPath),
+						Path:    relPath,
 					}); err != nil {
 						errLogFunc(err)
 						return
