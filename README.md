@@ -5,7 +5,7 @@ Source code for https://meico.dance
 ## Local dev
 
 ```sh
-go run utils/build.go
+go run utils/build.go --addr=:8080
 ```
 
 ## Deployment
