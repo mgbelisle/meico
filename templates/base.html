@@ -27,11 +27,13 @@
 	</div>
       </nav>
     </header>
-    <img src="{{ .RootURL }}/img/hero.jpg" alt="hero.jpg" class="w-100 d-none d-lg-block" />
+    <img src="{{ .RootURL }}/img/hero.jpg" alt="hero.jpg" class="w-100" />
     {{ end }}
     {{ block "main" . }}
     <main class="container">
-      {{ block "content" . }}<h1>Content</h1>{{ end }}
+      {{ block "content" . }}
+      {{ template "content-h1" "Content"}}
+      {{ end }}
     </main>
     {{ end }}
     {{ block "script" . }}
