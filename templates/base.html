@@ -26,21 +26,18 @@
 	  </ul>
 	</div>
       </nav>
-      <div class="container text-white text-center d-none d-lg-block header-content-lg">
+    </header>
+    <div>
+      <img src="{{ .RootURL }}/img/hero.jpg" alt="hero.jpg" class="w-100" />
+      <div class="{{ block "header-class" . }}text-white{{ end }} position-absolute center">
 	<p class="display-1 mt-5">{{ block "header-content-h1" . }}{{ end }}</p>
 	<p class="display-3">{{ block "header-content-h2" . }}{{ end }}</p>
       </div>
-    </header>
-    <img src="{{ .RootURL }}/img/hero.jpg" alt="hero.jpg" class="w-100" />
+    </div>
     {{ end }}
     {{ block "main" . }}
     <main class="container">
-      <div class="d-lg-none text-center">
-	<h1 class="mt-5">{{ block "header-content-h1" . }}{{ end }}</h1>
-	<h2>{{ block "header-content-h2" . }}{{ end }}</h2>
-      </div>
       {{ block "content" . }}
-      {{ template "content-h1" "Content" }}
       {{ end }}
     </main>
     {{ end }}
