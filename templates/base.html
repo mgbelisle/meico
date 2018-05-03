@@ -12,7 +12,7 @@
   <body>
     {{ block "body" . }}
     {{ block "header" . }}
-    <header class="position-absolute w-100">
+    <header class="w-100">
       <nav class="navbar navbar-expand-lg navbar-light">
 	<a class="navbar-brand" href="{{ .RootURL }}"><img src="{{ .RootURL }}/img/logo.svg" height="80px" alt="logo" /> Mei/Co Dance</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,7 +27,7 @@
 	</div>
       </nav>
     </header>
-    <img src="{{ .RootURL }}/img/hero.jpg" alt="hero.jpg" class="w-100" />
+    <img src="{{ .RootURL }}/img/hero.jpg" alt="hero.jpg" class="w-100 d-none d-lg-block" />
     {{ end }}
     {{ block "main" . }}
     <main class="container">
@@ -36,7 +36,7 @@
     {{ end }}
     {{ block "script" . }}
     <script src="{{ .RootURL }}/js/jquery-3.3.1.slim.min.js"></script>
-    <script src="{{ .RootURL }}/bootstrap-4.0.0/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ .RootURL }}/bootstrap-4.1.1/js/bootstrap.bundle.min.js"></script>
     <script src="{{ .RootURL }}/js/main.js"></script>
     {{ end }}
     {{ end }}

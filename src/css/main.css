@@ -1,3 +1,10 @@
 nav {
     background: linear-gradient(to top right, rgba(255, 255, 255, 0.0), rgba(255, 255, 255, 1));
 }
+
+/* Large */
+@media (min-width: 992px) {
+    header {
+	position: absolute !important;
+    }
+}
