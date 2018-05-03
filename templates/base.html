@@ -27,16 +27,7 @@
 	</div>
       </nav>
     </header>
-    <div class="position-relative">
-      {{ block "banner-img" . }}<img src="{{ .RootURL }}{{ block "banner-img-src" . }}/img/banner.jpg{{ end }}" alt="hero.jpg" class="w-100" />{{ end }}
-      <div class="{{ block "banner-class" . }}{{ end }} position-absolute center">
-	{{/* Do display-* for large, h* for less. There is probably a better way to do this with css but I am lazy. */}}
-	<p class="display-1 mt-5 d-lg-block d-none">{{ block "banner-h1" . }}{{ end }}</p>
-	<p class="display-3 d-lg-block d-none">{{ block "banner-h2" . }}{{ end }}</p>
-	<h1 class="mt-5 d-lg-none">{{ block "banner-h1" . }}{{ end }}</h1>
-	<h3 class="d-lg-none">{{ block "banner-h2" . }}{{ end }}</h3>
-      </div>
-    </div>
+    {{ block "banner" . }}{{ end }}
     {{ end }}
     {{ block "main" . }}
     <main class="container">

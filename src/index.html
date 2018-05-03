@@ -1,6 +1,4 @@
-{{ block "banner-class" . }}text-white{{ end }}
-{{ block "banner-h1" . }}Mei/Co Dance{{ end }}
-{{ block "banner-h2" . }}Dance for the King{{ end }}
+{{ block "banner" . }}{{ template "banner-tmpl" (dict "Parent" . "H1" "Mei/Co Dance" "H2" "Dancing to tell your story" "Img" "/img/banner.jpg" "Class" "text-white") }}{{ end }}
 
 {{ block "content" . }}
 <h1 class="pt-5">Content</h1>
