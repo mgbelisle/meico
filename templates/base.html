@@ -27,15 +27,14 @@
 	</div>
       </nav>
       <div class="container text-center text-white">
-	{{ block "header-content" . }}
-	<h1 class="display-1 header-content-h1-lg">Mei/Co Dance</h1>
-	{{ end }}
+	{{ template "header-content" . }}
       </div>
     </header>
     <img src="{{ .RootURL }}/img/hero.jpg" alt="hero.jpg" class="w-100" />
     {{ end }}
     {{ block "main" . }}
     <main class="container">
+      {{ template "header-content" . }}
       {{ block "content" . }}
       {{ template "content-h1" "Content"}}
       {{ end }}
