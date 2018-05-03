@@ -1,8 +1,9 @@
 {{ define "header-content" }}
-{{ block "header-content-h1" . }}
-<p class="display-1 header-content-h1-lg">Mei/Co Dance</p>
+{{ block "header-content" . }}
+{{ with .H1 }}
+<p class="display-1">{{ . }}</p>
 {{ end }}
-{{ block "header-content-h2" . }}
-<p class="display-2">Dancing for the King</p>
+{{ with .H2 }}
+<p class="display-3">{{ . }}</p>
 {{ end }}
 {{ end }}
