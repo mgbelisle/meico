@@ -35,6 +35,20 @@
       {{ end }}
     </main>
     {{ end }}
+    {{ block "footer" . }}
+    <footer class="footer py-5 text-muted d-print-none">
+      <div class="container">
+	<div class="row">
+	  <div class="col col-auto">
+            &copy; 2018 Mei/Co Dance
+	  </div>
+	  <div class="col col-auto ml-auto">
+            <a href="{{ .RootURL }}/contact/">Contact us</a>
+	  </div>
+	</div>
+      </div>
+    </footer>
+    {{ end }}
     {{ block "script" . }}
     <script src="{{ .RootURL }}/js/jquery-3.3.1.slim.min.js"></script>
     <script src="{{ .RootURL }}/bootstrap-4.1.1/js/bootstrap.bundle.min.js"></script>
