@@ -26,7 +26,7 @@ OPTIONS:
 var (
 	inFlag        = flag.String("in", "src", "Input dir")
 	outFlag       = flag.String("out", "www", "Output dir")
-	templatesFlag = flag.String("templates", "templates/base.html templates/**", "String separated list of templates. The first one is the base template")
+	templatesFlag = flag.String("templates", "templates/base.html templates/**.html", "String separated list of template globs. The first one is the base template (required)")
 	verboseFlag   = flag.Bool("verbose", false, "Verbose output")
 	addrFlag      = flag.String("addr", "", "Address to serve output dir, if provided")
 )
@@ -137,29 +137,33 @@ func main() {
 
 func build(errLogFunc func(error)) {
 	// Templates setup
-	var tmpl *template.Template
-	for _, glob := range strings.Fields(*templatesFlag) {
-		paths, err := filepath.Glob(glob)
+	templatesFields := strings.Fields(*templatesFlag)
+	if len(templatesFields) < 1 {
+		errLogFunc(errors.New("--templates requires at least the base template"))
+		return
+	}
+	basePaths, err := filepath.Glob(templatesFields[0])
+	if err != nil {
+		errLogFunc(err)
+		return
+	}
+	if l := len(basePaths); l != 1 {
+		errLogFunc(fmt.Errorf("%d base templates exist, exactly 1 required", l))
+		return
+	}
+	tmpl, err := template.New(filepath.Base(basePaths[0])).Funcs(TemplateFuncs).ParseFiles(basePaths[0])
+	if err != nil {
+		errLogFunc(err)
+		return
+	}
+	verboseLogger.Printf("Parsed base template: %s", basePaths[0])
+	for _, glob := range templatesFields[1:] {
+		tmpl, err = tmpl.ParseGlob(glob)
 		if err != nil {
 			errLogFunc(err)
 			return
 		}
-		verboseLogger.Printf("Parsing templates: %v", paths)
-		if tmpl == nil {
-			if 0 < len(paths) {
-				tmpl, err = template.New(filepath.Base(paths[0])).Funcs(TemplateFuncs).ParseFiles(paths...)
-				if err != nil {
-					errLogFunc(err)
-					return
-				}
-			}
-		} else {
-			tmpl, err = tmpl.ParseFiles(paths...)
-			if err != nil {
-				errLogFunc(err)
-				return
-			}
-		}
+		verboseLogger.Printf("Parsed templates: %s", glob)
 	}
 
 	// Render the files
