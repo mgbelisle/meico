@@ -13,7 +13,7 @@
     {{ block "body" . }}
     {{ block "header" . }}
     <header class="w-100">
-      <nav class="navbar navbar-expand-lg navbar-light">
+      <nav class="navbar navbar-expand-lg navbar-light w-100">
 	<a class="navbar-brand" href="{{ .RootURL }}"><img src="{{ .RootURL }}/img/logo.svg" height="80px" alt="logo" /> Mei/Co Dance</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
 	  <span class="navbar-toggler-icon"></span>
@@ -26,9 +26,9 @@
 	  </ul>
 	</div>
       </nav>
+      {{ block "banner" . }}{{ end }}
+      {{ end }}
     </header>
-    {{ block "banner" . }}{{ end }}
-    {{ end }}
     {{ block "main" . }}
     <main class="container">
       {{ block "content" . }}

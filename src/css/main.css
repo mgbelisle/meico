@@ -4,12 +4,12 @@ nav {
 
 /* Large */
 @media (min-width: 992px) {
-    header {
+    nav {
 	position: absolute !important;
     }
 }
 
-header {
+nav {
     z-index: 1;
 }
 
