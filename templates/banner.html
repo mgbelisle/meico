@@ -1,5 +1,5 @@
 {{ define "banner-tmpl" }}
-<div class="position-relative">
+<div class="position-relative banner">
   <img src="{{ .Parent.RootURL }}{{ .Img }}" alt="{{ .Img }}" class="w-100" />
   <div class="{{ .Class }} position-absolute text-center center w-100">
     {{/* Do display-* for large, h* for less. There is probably a better way to do this with css but I am lazy. */}}
