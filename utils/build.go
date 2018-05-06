@@ -244,4 +244,5 @@ func build(errLogFunc func(error)) {
 		return
 	}
 	wg.Wait()
+	verboseLogger.Print("Build success")
 }

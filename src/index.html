@@ -1,5 +1,13 @@
-{{ block "banner" . }}{{ template "banner-tmpl" (dict "Parent" . "H1" "Mei/Co Dance" "H2" "Dancing to tell your story" "Img" "/img/banner.jpg" "Class" "text-white") }}{{ end }}
+{{ define "banner-h1" }}Mei/Co Dance{{ end }}
+{{ define "banner-h2" }}Dancing to tell your story{{ end }}
+{{ define "banner-img" }}/img/banner.jpg{{ end }}
+{{ define "banner-class" }}text-white{{ end }}
+{{ define "banner" }}
+{{ template "banner-tmpl" }}
+{{ end }}
 
 {{ block "content" . }}
-<h1 class="pt-5">Home content</h1>
+<div class="my-5">
+  <h1>Home content</h1>
+</div>
 {{ end }}

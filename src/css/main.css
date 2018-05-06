@@ -19,3 +19,7 @@ nav {
 footer {
     background: linear-gradient(to bottom left, rgba(240, 240, 240, 0), rgba(240, 240, 240, 1));
 }
+
+.icon {
+    height: 32px;
+}
