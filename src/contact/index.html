@@ -1,20 +1,18 @@
 {{ define "banner-h1" }}Contact Us{{ end }}
 {{ define "banner-h2" }}We would love to hear from you.{{ end }}
-{{ define "banner-img" }}/img/banner.jpg{{ end }}
+{{ define "banner-img" }}/img/about-banner.jpg{{ end }}
 {{ define "banner-class" }}text-white{{ end }}
 {{ define "banner" }}
 {{ template "banner-tmpl" }}
 {{ end }}
 
 {{ define "content" }}
-<div class="my-5">
-  <h1>Phone</h1>
-  <p class="text-center">
-    <a href="tel:979-220-0869"><img class="icon" src="{{ .RootURL }}/img/octicons-7.2.0/device-mobile.svg" alt="Mobile device"> 979-220-0869</a>
+<div class="py-5 text-center h2">
+  <p class="my-5">
+    <a href="tel:979-220-0869"><img class="icon-lg" src="{{ .RootURL }}/img/octicons-7.2.0/device-mobile.svg" alt="Mobile device"> 979-220-0869</a>
   </p>
-  <h1>Email</h1>
-  <p class="text-center">
-    <a href="mailto:dance@meico.dance"><img class="icon" src="{{ .RootURL }}/img/octicons-7.2.0/mail.svg" alt="Mail"> dance@meico.dance</a>
+  <p class="my-5">
+    <a href="mailto:dance@meico.dance"><img class="icon-lg" src="{{ .RootURL }}/img/octicons-7.2.0/mail.svg" alt="Mail"> dance@meico.dance</a>
   </p>
 </div>
 {{ end }}

@@ -21,5 +21,11 @@ footer {
 }
 
 .icon {
+    width: 32px;
     height: 32px;
+}
+
+.icon-lg {
+    width: 48px;
+    height: 48px;
 }
