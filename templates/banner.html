@@ -1,6 +1,7 @@
 {{ define "banner-tmpl" }}
 <div class="position-relative banner">
-  <img src="{{ .RootURL }}{{ template "banner-img" }}" alt="{{ template "banner-img" }}" class="w-100">
+  <img src="{{ .RootURL }}{{ template "banner-img" }}" alt="{{ template "banner-img" }}" class="w-100 d-none d-lg-inline-block">
+  <img src="{{ .RootURL }}{{ template "banner-img-mobile" }}" alt="{{ template "banner-img-mobile" }}" class="w-100 d-inline-block d-lg-none">
   <div class="{{ block "banner-class" . }}{{ end }} position-absolute text-center center w-100">
     {{/* Do display-* for large, h* for less. There is probably a better way to do this with css but I am lazy. */}}
     <p class="display-1 mt-5 d-lg-block d-none">{{ template "banner-h1" . }}</p>
