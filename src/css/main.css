@@ -2,11 +2,9 @@ nav {
     background: linear-gradient(to top right, rgba(240, 240, 240, 0), rgba(240, 240, 240, 1));
 }
 
-@media (min-width: 992px) {
-    .banner {
-	margin-top: -106px;
-	z-index: -1;
-    }
+.banner {
+    margin-top: -106px;
+    z-index: -1;
 }
 
 .center {
