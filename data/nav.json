@@ -7,7 +7,19 @@
     {
 	"url": "/events/",
 	"path": "events/index.html",
-	"text": "Events"
+	"text": "Events",
+	"children": [
+	    {
+		"url": "/events/past/",
+		"path": "events/past/index.html",
+		"text": "Past Events"
+	    },
+	    {
+		"url": "/events/future/",
+		"path": "events/future/index.html",
+		"text": "Future Events"
+	    }
+	]
     },
     {
 	"url": "/about/",

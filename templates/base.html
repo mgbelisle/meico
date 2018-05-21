@@ -20,11 +20,21 @@
 	</button>
 	<div class="collapse navbar-collapse" id="navbar-content">
 	  <ul class="navbar-nav ml-auto mr-3">
-	    {{ with $path := .Path }}
-	    {{ range json "nav.json" }}
-	    {{ $active := eq (string .path) $path }}
-	    <li class="nav-item {{ if $active }}active{{ end }}">
-	      <a class="nav-link h5" href="{{ .RootURL }}{{ .url }}">{{ .text }}{{ if $active }}<span class="sr-only"> (current)</span>{{ end }}</a>
+	    {{ with $parent := . }}
+	    {{ range $idx, $_ := json "nav.json" }}
+	    {{ $active := eq (string .path) $parent.Path }}
+	    <li class="nav-item {{ if $active }}active{{ end }} {{ if .children }}dropdown{{ end }}">
+	      <a class="nav-link h5 {{ if .children }}dropdown-toggle{{ end }}" href="{{ $parent.RootURL }}{{ .url }}" {{ if .children }}id="navbar-dropdown-{{ $idx }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{{ end }}>{{ .text }}{{ if $active }}<span class="sr-only"> (current)</span>{{ end }}</a>
+	      {{ if .children }}
+	      <div class="dropdown-menu" aria-labelledby="navbar-dropdown-{{ $idx }}">
+		<a class="dropdown-item {{ if $active }}active{{ end }}" href="{{ $parent.RootURL }}{{ .url }}">{{ .text }}</a>
+		<div class="dropdown-divider"></div>
+		{{ range .children }}
+		{{ $active2 := eq (string .path) $parent.Path }}
+		<a class="dropdown-item {{ if $active2 }}active{{ end }}" href="{{ $parent.RootURL }}{{ .url }}">{{ .text }}</a>
+		{{ end }}
+              </div>
+	      {{ end }}
 	    </li>
 	    {{ end }}
 	    {{ end }}
