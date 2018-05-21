@@ -22,20 +22,32 @@
 	  <ul class="navbar-nav ml-auto mr-3">
 	    {{ with $parent := . }}
 	    {{ range $idx, $_ := json "nav.json" }}
-	    {{ $active := eq (string .path) $parent.Path }}
-	    <li class="nav-item {{ if $active }}active{{ end }} {{ if .children }}dropdown{{ end }}">
-	      <a class="nav-link h5 {{ if .children }}dropdown-toggle{{ end }}" href="{{ $parent.RootURL }}{{ .url }}" {{ if .children }}id="navbar-dropdown-{{ $idx }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{{ end }}>{{ .text }}{{ if $active }}<span class="sr-only"> (current)</span>{{ end }}</a>
+	    {{ if not .skip }}
+	    <li class="nav-item {{ if .children }}dropdown{{ end }}">
+	      <a class="nav-link h5 {{ if .children }}dropdown-toggle{{ end }}"
+		 href="{{ if .children }}#{{ else }}{{ $parent.RootURL }}{{ .url }}{{ end }}"
+		 {{ if .children }}
+		 id="navbar-dropdown-{{ $idx }}"
+		 role="button"
+		 data-toggle="dropdown"
+		 aria-haspopup="true"
+		 aria-expanded="false"
+		 {{ end }}
+		 >{{ .text }}</a>
 	      {{ if .children }}
 	      <div class="dropdown-menu" aria-labelledby="navbar-dropdown-{{ $idx }}">
-		<a class="dropdown-item {{ if $active }}active{{ end }}" href="{{ $parent.RootURL }}{{ .url }}">{{ .text }}</a>
-		<div class="dropdown-divider"></div>
 		{{ range .children }}
-		{{ $active2 := eq (string .path) $parent.Path }}
-		<a class="dropdown-item {{ if $active2 }}active{{ end }}" href="{{ $parent.RootURL }}{{ .url }}">{{ .text }}</a>
+		{{ if not .skip }}
+		<a class="dropdown-item" href="{{ $parent.RootURL }}{{ .url }}">{{ .text }}</a>
+		{{ if .divider }}
+		<div class="dropdown-divider"></div>
+		{{ end }}
+		{{ end }}
 		{{ end }}
               </div>
 	      {{ end }}
 	    </li>
+	    {{ end }}
 	    {{ end }}
 	    {{ end }}
 	  </ul>

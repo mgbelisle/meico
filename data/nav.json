@@ -1,44 +1,64 @@
 [
     {
 	"url": "/",
-	"path": "index.html",
 	"text": "Home"
     },
     {
 	"url": "/events/",
-	"path": "events/index.html",
 	"text": "Events",
 	"children": [
 	    {
 		"url": "/events/past/",
-		"path": "events/past/index.html",
 		"text": "Past Events"
 	    },
 	    {
 		"url": "/events/future/",
-		"path": "events/future/index.html",
 		"text": "Future Events"
 	    }
 	]
     },
     {
 	"url": "/about/",
-	"path": "about/index.html",
-	"text": "About"
-    },
-    {
-	"url": "/booking/",
-	"path": "booking/index.html",
-	"text": "Booking"
+	"text": "About",
+	"children": [
+	    {
+		"url": "/about/story/",
+		"text": "Our Story"
+	    },
+	    {
+		"url": "/about/people/",
+		"text": "Our People"
+	    },
+	    {
+		"url": "/about/mission/",
+		"text": "Our Mission"
+	    },
+	    {
+		"url": "/about/name/",
+		"text": "Our Name"
+	    },
+	    {
+		"url": "/about/auditions/",
+		"text": "Auditions"
+	    },
+	    {
+		"url": "/about/testimonials/",
+		"text": "Testimonials"
+	    }
+	]
     },
     {
 	"url": "/contribute/",
-	"path": "gallery/index.html",
 	"text": "Gallery"
     },
     {
+	"skip": true,
+	"url": "/booking/",
+	"text": "Booking"
+    },
+    {
+	"skip": true,
 	"url": "/contact/",
-	"path": "contact/index.html",
 	"text": "Contact"
     }
 ]
