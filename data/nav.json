@@ -48,7 +48,7 @@
 	]
     },
     {
-	"url": "/contribute/",
+	"url": "/gallery/",
 	"text": "Gallery"
     },
     {
@@ -58,6 +58,10 @@
     },
     {
 	"skip": true,
+	"url": "/contribute/",
+	"text": "Contribute"
+    },
+    {
 	"url": "/contact/",
 	"text": "Contact"
     }
