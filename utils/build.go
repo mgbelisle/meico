@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"errors"
 	"flag"
 	"fmt"
@@ -26,6 +27,7 @@ OPTIONS:
 var (
 	inFlag        = flag.String("in", "src", "Input dir")
 	outFlag       = flag.String("out", "www", "Output dir")
+	dataFlag      = flag.String("data", "data", "Data dir (for json data)")
 	templatesFlag = flag.String("templates", "templates/base.html templates/**.html", "String separated list of template globs. The first one is the base template (required)")
 	verboseFlag   = flag.Bool("verbose", false, "Verbose output")
 	addrFlag      = flag.String("addr", "", "Address to serve output dir, if provided")
@@ -37,20 +39,13 @@ type TemplateData struct {
 }
 
 var TemplateFuncs = template.FuncMap{
-	// {{ dict "fooKey" "fooVal" "barKey" "barValue" }}
-	"dict": func(values ...interface{}) (map[string]interface{}, error) {
-		if len(values)%2 != 0 {
-			return nil, errors.New("dict must have an even number of args")
+	"json": func(file string) (interface{}, error) {
+		data, err := ioutil.ReadFile(filepath.Join(*dataFlag, file))
+		if err != nil {
+			return nil, err
 		}
-		dict := make(map[string]interface{}, len(values)/2)
-		for i := 0; i < len(values); i += 2 {
-			key, ok := values[i].(string)
-			if !ok {
-				return nil, errors.New("dict keys must be strings")
-			}
-			dict[key] = values[i+1]
-		}
-		return dict, nil
+		var obj interface{}
+		return obj, json.Unmarshal(data, &obj)
 	},
 	"string": func(value interface{}) (string, error) {
 		if value, ok := value.(string); ok {
@@ -103,7 +98,10 @@ func main() {
 			prevModTime := time.Now()
 			for {
 				rebuild := false
-				for _, glob := range append([]string{filepath.Join(*inFlag, "**")}, strings.Fields(*templatesFlag)...) {
+				for _, glob := range append([]string{
+					filepath.Join(*inFlag, "**"),
+					filepath.Join(*dataFlag, "**"),
+				}, strings.Fields(*templatesFlag)...) {
 					paths, err := filepath.Glob(glob)
 					if err != nil {
 						errLogger.Print(err)

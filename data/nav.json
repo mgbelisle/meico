@@ -1,0 +1,32 @@
+[
+    {
+	"url": "/",
+	"path": "index.html",
+	"text": "Home"
+    },
+    {
+	"url": "/events/",
+	"path": "events/index.html",
+	"text": "Events"
+    },
+    {
+	"url": "/about/",
+	"path": "about/index.html",
+	"text": "About"
+    },
+    {
+	"url": "/booking/",
+	"path": "booking/index.html",
+	"text": "Booking"
+    },
+    {
+	"url": "/contribute/",
+	"path": "gallery/index.html",
+	"text": "Gallery"
+    },
+    {
+	"url": "/contact/",
+	"path": "contact/index.html",
+	"text": "Contact"
+    }
+]
