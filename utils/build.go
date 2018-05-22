@@ -53,6 +53,10 @@ var TemplateFuncs = template.FuncMap{
 		}
 		return "", fmt.Errorf("Not a string: %v (%T)", value, value)
 	},
+	"active": func(url string, templateData *TemplateData) bool {
+		fmt.Printf("%s %v\n", url, templateData)
+		return false
+	},
 }
 
 var (

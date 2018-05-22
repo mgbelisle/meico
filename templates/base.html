@@ -22,10 +22,11 @@
 	  <ul class="navbar-nav ml-auto mr-3">
 	    {{ with $parent := . }}
 	    {{ range $idx, $_ := json "nav.json" }}
+	    {{ $active := active .url $parent }}
 	    {{ if not .skip }}
-	    <li class="nav-item {{ if .children }}dropdown{{ end }}">
+	    <li class="nav-item {{ if .children }}dropdown{{ end }} {{if $active }}active{{ end }}">
 	      <a class="nav-link h5 {{ if .children }}dropdown-toggle{{ end }}"
-		 href="{{ if .children }}#{{ else }}{{ $parent.RootURL }}{{ .url }}{{ end }}"
+		 href="{{ $parent.RootURL }}{{ .url }}"
 		 {{ if .children }}
 		 id="navbar-dropdown-{{ $idx }}"
 		 role="button"
