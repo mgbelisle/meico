@@ -34,8 +34,7 @@ var (
 )
 
 type TemplateData struct {
-	RootURL string // Relative path to the root url, relative to --in (e.g. "../..")
-	Path    string // Relative path of the file being parsed, relative to --in (e.g. "contact/index.html")
+	URL func(string) (string, error)
 }
 
 var TemplateFuncs = template.FuncMap{
@@ -219,8 +218,23 @@ func build(errLogFunc func(error)) {
 						return
 					}
 					if err := tmpl2.Execute(outFile, &TemplateData{
-						RootURL: filepath.ToSlash(rootPath),
-						Path:    relPath,
+						URL: func(url string) (string, error) {
+							path := filepath.FromSlash(url)
+							stat := path
+							if filepath.IsAbs(stat) {
+								stat = filepath.Join(*inFlag, stat)
+							} else {
+								return "", errors.New("Relative paths not supported yet")
+							}
+							if info, err := os.Stat(stat); err != nil {
+								return "", err
+							} else if info.IsDir() {
+								if _, err := os.Stat(filepath.Join(stat, "index.html")); err != nil {
+									return "", err
+								}
+							}
+							return filepath.ToSlash(filepath.Join(rootPath, path)), nil
+						},
 					}); err != nil {
 						errLogFunc(err)
 						return

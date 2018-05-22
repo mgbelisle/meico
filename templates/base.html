@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {{ block "css" . }}
-    <link rel="stylesheet" type="text/css" href="{{ .RootURL }}/bootstrap-4.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ .RootURL }}/css/main.css">
+    <link rel="stylesheet" type="text/css" href="{{ call .URL "/bootstrap-4.1.1/css/bootstrap.min.css" }}">
+    <link rel="stylesheet" type="text/css" href="{{ call .URL "/css/main.css" }}">
     {{ end }}
   </head>
   <body>
@@ -14,7 +14,7 @@
     {{ block "header" . }}
     <header class="w-100">
       <nav class="navbar navbar-expand-lg navbar-light w-100 sticky-top">
-	<a class="navbar-brand" href="{{ .RootURL }}"><img src="{{ .RootURL }}/img/logo.svg" height="80px" alt="logo" /> Mei/Co Dance</a>
+	<a class="navbar-brand" href="{{ call .URL "/" }}"><img src="{{ call .URL "/img/logo.svg" }}" height="80px" alt="logo" /> Mei/Co Dance</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
 	  <span class="navbar-toggler-icon"></span>
 	</button>
@@ -22,11 +22,11 @@
 	  <ul class="navbar-nav ml-auto mr-3">
 	    {{ with $parent := . }}
 	    {{ range $idx, $_ := json "nav.json" }}
-	    {{ $active := active .url $parent }}
+	    {{ $active := false }}
 	    {{ if not .skip }}
 	    <li class="nav-item {{ if .children }}dropdown{{ end }} {{if $active }}active{{ end }}">
 	      <a class="nav-link h5 {{ if .children }}dropdown-toggle{{ end }}"
-		 href="{{ $parent.RootURL }}{{ .url }}"
+		 href="{{ call $parent.URL .url }}"
 		 {{ if .children }}
 		 id="navbar-dropdown-{{ $idx }}"
 		 role="button"
@@ -39,7 +39,7 @@
 	      <div class="dropdown-menu" aria-labelledby="navbar-dropdown-{{ $idx }}">
 		{{ range .children }}
 		{{ if not .skip }}
-		<a class="dropdown-item" href="{{ $parent.RootURL }}{{ .url }}">{{ .text }}</a>
+		<a class="dropdown-item" href="{{ call $parent.URL .url }}">{{ .text }}</a>
 		{{ if .divider }}
 		<div class="dropdown-divider"></div>
 		{{ end }}
@@ -71,18 +71,18 @@
             <span class="align-middle">&copy; 2018 Mei/Co Dance</span>
 	  </div>
 	  <div class="col col-auto my-3">
-            <a href="https://www.youtube.com/channel/UCTr8w3QXcjSmLa6vO70kelA"><img src="{{ .RootURL }}/img/icons/youtube.png" alt="YouTube" class="icon" /></a>
-            <a href="https://www.facebook.com/meggie.pinones"><img src="{{ .RootURL }}/img/icons/facebook.svg" alt="Facebook" class="icon" /></a>
-            <a href="https://ipfs.io/ipns/meico.dance"><img src="{{ .RootURL }}/img/icons/ipfs.svg" alt="IPFS" class="icon" /></a>
+            <a href="https://www.youtube.com/channel/UCTr8w3QXcjSmLa6vO70kelA"><img src="{{ call .URL "/img/icons/youtube.png" }}" alt="YouTube" class="icon" /></a>
+            <a href="https://www.facebook.com/meggie.pinones"><img src="{{ call .URL "/img/icons/facebook.svg" }}" alt="Facebook" class="icon" /></a>
+            <a href="https://ipfs.io/ipns/meico.dance"><img src="{{ call .URL "/img/icons/ipfs.svg" }}" alt="IPFS" class="icon" /></a>
 	  </div>
 	</div>
       </div>
     </footer>
     {{ end }}
     {{ block "script" . }}
-    <script src="{{ .RootURL }}/js/jquery-3.3.1.slim.min.js"></script>
-    <script src="{{ .RootURL }}/bootstrap-4.1.1/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ .RootURL }}/js/main.js"></script>
+    <script src="{{ call .URL "/js/jquery-3.3.1.slim.min.js" }}"></script>
+    <script src="{{ call .URL "/bootstrap-4.1.1/js/bootstrap.bundle.min.js" }}"></script>
+    <script src="{{ call .URL "/js/main.js" }}"></script>
     {{ end }}
     {{ end }}
   </body>

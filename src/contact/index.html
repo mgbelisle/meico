@@ -1,7 +1,7 @@
 {{ define "banner-h1" }}Contact Us{{ end }}
 {{ define "banner-h2" }}We would love to hear from you.{{ end }}
-{{ define "banner-img" }}/img/contact-banner.jpg{{ end }}
-{{ define "banner-img-mobile" }}/img/contact-banner-mobile.jpg{{ end }}
+{{ define "banner-img" }}{{ call .URL "/img/contact-banner.jpg" }}{{ end }}
+{{ define "banner-img-mobile" }}{{ call .URL "/img/contact-banner-mobile.jpg" }}{{ end }}
 {{ define "banner-class" }}text-white{{ end }}
 {{ define "banner" }}
 {{ template "banner-tmpl" . }}
@@ -10,10 +10,10 @@
 {{ define "content" }}
 <div class="py-5 text-center h2">
   <p class="my-5">
-    <a href="tel:979-220-0869"><img class="icon-lg" src="{{ .RootURL }}/img/octicons-7.2.0/device-mobile.svg" alt="Mobile device"> 979-220-0869</a>
+    <a href="tel:979-220-0869"><img class="icon-lg" src="{{ call .URL "/img/octicons-7.2.0/device-mobile.svg" }}" alt="Mobile device"> 979-220-0869</a>
   </p>
   <p class="my-5">
-    <a href="mailto:dance@meico.dance"><img class="icon-lg" src="{{ .RootURL }}/img/octicons-7.2.0/mail.svg" alt="Mail"> dance@meico.dance</a>
+    <a href="mailto:dance@meico.dance"><img class="icon-lg" src="{{ call .URL "/img/octicons-7.2.0/mail.svg" }}" alt="Mail"> dance@meico.dance</a>
   </p>
 </div>
 {{ end }}
