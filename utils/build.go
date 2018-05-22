@@ -34,7 +34,8 @@ var (
 )
 
 type TemplateData struct {
-	URL func(string) (string, error)
+	URL    func(string) (string, error)
+	Active func(string) (bool, error)
 }
 
 var TemplateFuncs = template.FuncMap{
@@ -219,12 +220,12 @@ func build(errLogFunc func(error)) {
 					}
 					if err := tmpl2.Execute(outFile, &TemplateData{
 						URL: func(url string) (string, error) {
-							path := filepath.FromSlash(url)
-							stat := path
+							fromSlash := filepath.FromSlash(url)
+							stat := fromSlash
 							if filepath.IsAbs(stat) {
 								stat = filepath.Join(*inFlag, stat)
 							} else {
-								return "", errors.New("Relative paths not supported yet")
+								return "", errors.New("Relative paths not supported yet") // TODO
 							}
 							if info, err := os.Stat(stat); err != nil {
 								return "", err
@@ -233,7 +234,18 @@ func build(errLogFunc func(error)) {
 									return "", err
 								}
 							}
-							return filepath.ToSlash(filepath.Join(rootPath, path)), nil
+							return filepath.ToSlash(filepath.Join(rootPath, fromSlash)), nil
+						},
+						Active: func(url string) (bool, error) {
+							if url == "/" {
+								return relPath == "index.html", nil
+							}
+							fromSlash := filepath.FromSlash(url)
+							if filepath.IsAbs(fromSlash) {
+								return strings.HasPrefix(relPath, strings.TrimPrefix(fromSlash, string(filepath.Separator))), nil
+							} else {
+								return false, errors.New("Relative paths not supported yet") // TODO
+							}
 						},
 					}); err != nil {
 						errLogFunc(err)

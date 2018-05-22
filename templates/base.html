@@ -22,7 +22,7 @@
 	  <ul class="navbar-nav ml-auto mr-3">
 	    {{ with $parent := . }}
 	    {{ range $idx, $_ := json "nav.json" }}
-	    {{ $active := false }}
+	    {{ $active := call $parent.Active .url }}
 	    {{ if not .skip }}
 	    <li class="nav-item {{ if .children }}dropdown{{ end }} {{if $active }}active{{ end }}">
 	      <a class="nav-link h5 {{ if .children }}dropdown-toggle{{ end }}"
@@ -34,12 +34,13 @@
 		 aria-haspopup="true"
 		 aria-expanded="false"
 		 {{ end }}
-		 >{{ .text }}</a>
+		 >{{ .text }}{{ if $active }} <span class="sr-only">(current)</span>{{ end }}</a>
 	      {{ if .children }}
 	      <div class="dropdown-menu" aria-labelledby="navbar-dropdown-{{ $idx }}">
 		{{ range .children }}
+		{{ $active2 := call $parent.Active .url }}
 		{{ if not .skip }}
-		<a class="dropdown-item" href="{{ call $parent.URL .url }}">{{ .text }}</a>
+		<a class="dropdown-item {{ if $active2 }}active{{ end }}" href="{{ call $parent.URL .url }}">{{ .text }}{{ if $active2 }} <span class="sr-only">(current)</span>{{ end }}</a>
 		{{ if .divider }}
 		<div class="dropdown-divider"></div>
 		{{ end }}
