@@ -28,7 +28,7 @@ var (
 	inFlag        = flag.String("in", "src", "Input dir")
 	outFlag       = flag.String("out", "www", "Output dir")
 	dataFlag      = flag.String("data", "data", "Data dir (for json data)")
-	templatesFlag = flag.String("templates", "templates/base.html templates/**.html", "String separated list of template globs. The first one is the base template (required)")
+	templatesFlag = flag.String("templates", "templates/base.html templates/*.html", "String separated list of template globs. The first one is the base template (required)")
 	verboseFlag   = flag.Bool("verbose", false, "Verbose output")
 	addrFlag      = flag.String("addr", "", "Address to serve output dir, if provided")
 )

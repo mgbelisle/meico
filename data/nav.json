@@ -49,7 +49,17 @@
     },
     {
 	"url": "/gallery/",
-	"text": "Gallery"
+	"text": "Gallery",
+	"children": [
+	    {
+		"url": "/gallery/photos/",
+		"text": "Photos"
+	    },
+	    {
+		"url": "/gallery/videos/",
+		"text": "Videos"
+	    }
+	]
     },
     {
 	"skip": true,
