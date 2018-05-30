@@ -1,37 +1,39 @@
 {{ block "content" . }}
 {{ $dot := . }}
 {{ $people := json "people.json" }}
-<ul class="nav nav-tabs" id="people-tab" role="tablist">
-  {{ range $idx, $_ := $people }}
-  <li class="nav-item">
-    <a class="nav-link {{ if eq $idx 0 }}active{{ else }}{{ end }}" id="people-tab-{{ $idx }}" data-toggle="tab" href="#people-{{ $idx }}" role="tab" aria-controls="people-{{ $idx }}" aria-selected="{{ if eq $idx 0 }}true{{ else }}false{{ end }}">
-      {{ .name }}
-    </a>
-  </li>
-  {{ end }}
-</ul>
-<div class="tab-content" id="people-tab-content">
-  {{ range $idx, $_ := $people }}  
-  <div class="tab-pane fade show active" id="people-{{ $idx }}" role="tabpanel" aria-labelledby="people-tab-{{ $idx }}">
-    <div class="container pt-3 px-0">
-      <div class="row">
-	<div class="col col-lg-3 col-md-5 col-12">
-	  <img src="{{ call $dot.URL .img }}" alt="{{ .name }}" class="w-100 img-thumbnail">
-	</div>
-	<div class="col">
-	  <h3 class="pt-3 pt-md-0">
-	    {{ .name }}
-	  </h3>
-	  <h4>
-	    {{ .position }}
-	  </h4>
-	  <p>
-	    {{ .bio }}
-	  </p>
+<div class="my-5">
+  <ul class="nav nav-tabs" id="people-tab" role="tablist">
+    {{ range $idx, $_ := $people }}
+    <li class="nav-item">
+      <a class="nav-link {{ if eq $idx 0 }}active{{ else }}{{ end }}" id="people-tab-{{ $idx }}" data-toggle="tab" href="#people-{{ $idx }}" role="tab" aria-controls="people-{{ $idx }}" aria-selected="{{ if eq $idx 0 }}true{{ else }}false{{ end }}">
+	{{ .name }}
+      </a>
+    </li>
+    {{ end }}
+  </ul>
+  <div class="tab-content" id="people-tab-content">
+    {{ range $idx, $_ := $people }}
+    <div class="tab-pane fade show {{ if eq $idx 0 }}active{{ else }}{{ end }}" id="people-{{ $idx }}" role="tabpanel" aria-labelledby="people-tab-{{ $idx }}">
+      <div class="container pt-3 px-0">
+	<div class="row">
+	  <div class="col col-lg-3 col-md-5 col-12">
+	    <img src="{{ call $dot.URL .img }}" alt="{{ .name }}" class="w-100 img-thumbnail">
+	  </div>
+	  <div class="col">
+	    <h3 class="pt-3 pt-md-0">
+	      {{ .name }}
+	    </h3>
+	    <h4>
+	      {{ .position }}
+	    </h4>
+	    <p>
+	      {{ .bio }}
+	    </p>
+	  </div>
 	</div>
       </div>
     </div>
+    {{ end }}
   </div>
-  {{ end }}
 </div>
 {{ end }}
