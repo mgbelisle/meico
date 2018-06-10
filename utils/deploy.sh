@@ -2,7 +2,7 @@
 
 set -e
 
-go run utils/build.go
+go run utils/build/main.go
 HASH=$(ipfs add -qr www | tail -n 1)
 ID=$(ssh meico@meico.dance "ipfs id -f='<id>'")
 TIMESTAMP=$(date +%s)
