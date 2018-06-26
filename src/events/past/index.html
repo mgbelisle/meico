@@ -1,0 +1,29 @@
+{{ define "banner-h1" }}Past Events{{ end }}
+{{ define "banner-img" }}{{ call .URL "/img/banners/events-past.jpg" }}{{ end }}
+{{ define "banner-img-mobile" }}{{ call .URL "/img/banners/events-past-mobile.jpg" }}{{ end }}
+{{ define "banner-class" }}text-white{{ end }}
+{{ define "banner" }}
+{{ template "banner-tmpl" . }}
+{{ end }}
+
+{{ block "content" . }}
+<div class="my-5">
+  <ul class="list-group">
+    <li class="list-group-item">
+      <h2>Fertile Ground Spring 2017</h2>
+      <p>Premiered <i>I Am Home</i></p>
+    </li>
+    <li class="list-group-item">
+      <h2>Project Dance Live Spring 2017</h2>
+    </li>
+    <li class="list-group-item">
+      <h2>Awakening Movement Fall Gala 2016</h2>
+      <p>Premiered <i>Aza Gail</i></p>
+    </li>
+    <li class="list-group-item">
+      <h2>Creative weekend and audition with KDA</h2>
+      <p>Pre Professional Fall 2016</p>
+    </li>
+  </ul>
+</div>
+{{ end }}

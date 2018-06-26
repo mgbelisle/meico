@@ -1,0 +1,20 @@
+{{ define "banner-h1" }}Future Events{{ end }}
+{{ define "banner-img" }}{{ call .URL "/img/banners/events-future.jpg" }}{{ end }}
+{{ define "banner-img-mobile" }}{{ call .URL "/img/banners/events-future-mobile.jpg" }}{{ end }}
+{{ define "banner-class" }}text-white{{ end }}
+{{ define "banner" }}
+{{ template "banner-tmpl" . }}
+{{ end }}
+
+{{ block "content" . }}
+<div class="my-5">
+  <ul class="list-group">
+    <li class="list-group-item">
+      <h2>Launch Party</h2>
+    </li>
+    <li class="list-group-item">
+      <h2>Here to Listen</h2>
+    </li>
+  </ul>
+</div>
+{{ end }}

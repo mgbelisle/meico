@@ -1,3 +1,11 @@
+{{ define "banner-h1" }}Our Story{{ end }}
+{{ define "banner-img" }}{{ call .URL "/img/banners/about-story.jpg" }}{{ end }}
+{{ define "banner-img-mobile" }}{{ call .URL "/img/banners/about-story-mobile.jpg" }}{{ end }}
+{{ define "banner-class" }}text-white{{ end }}
+{{ define "banner" }}
+{{ template "banner-tmpl" . }}
+{{ end }}
+
 {{ block "content" . }}
 <div class="my-5">
   <p>
