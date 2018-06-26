@@ -27,7 +27,7 @@
 	      {{ .position }}
 	    </h4>
 	    <p>
-	      {{ read (sprintf "people/bios/%s.html" .id) | html }}
+	      {{ html (read (sprintf "people/bios/%s.html" .id)) }}
 	    </p>
 	  </div>
 	</div>

@@ -63,6 +63,9 @@ var TemplateFuncs = template.FuncMap{
 		}
 		return string(data), nil
 	},
+	"html": func(v string) template.HTML {
+		return template.HTML(v)
+	},
 }
 
 var (
