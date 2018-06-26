@@ -15,11 +15,3 @@ ssh meico@meico.dance /bin/bash << EOF
     ipfs pin add -r $HASH
     ipfs name publish $HASH # This takes a while for some reason
 EOF
-
-# Replicate in a few spots
-# for ADDR in 138.68.18.245
-# do
-#     ID=$(ssh ipfs@$ADDR "ipfs id -f='<id>'")
-#     ipfs swarm connect /ip4/$ADDR/tcp/4001/ipfs/$ID
-#     ssh ipfs@$ADDR "ipfs pin add -r $HASH"
-# done

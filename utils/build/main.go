@@ -48,16 +48,20 @@ var TemplateFuncs = template.FuncMap{
 		var obj interface{}
 		return obj, json.Unmarshal(data, &obj)
 	},
-	"string": func(value interface{}) (string, error) {
-		if value, ok := value.(string); ok {
-			return value, nil
-		}
-		return "", fmt.Errorf("Not a string: %v (%T)", value, value)
+	"sprintf": func(format string, a ...interface{}) string {
+		return fmt.Sprintf(format, a...)
 	},
 	"uniq": func() string {
 		b := make([]byte, 16)
 		rand.Read(b)
 		return fmt.Sprintf("%x", b)
+	},
+	"read": func(file string) (string, error) {
+		data, err := ioutil.ReadFile(filepath.Join(*dataFlag, file))
+		if err != nil {
+			return "", err
+		}
+		return string(data), nil
 	},
 }
 

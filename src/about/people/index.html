@@ -17,7 +17,7 @@
       <div class="container pt-3 px-0">
 	<div class="row">
 	  <div class="col col-lg-3 col-md-5 col-12">
-	    <img src="{{ call $dot.URL .img }}" alt="{{ .name }}" class="w-100 img-thumbnail">
+	    <img src="{{ call $dot.URL (sprintf "/img/people/%s.png" .id) }}" alt="{{ .name }}" class="w-100 img-thumbnail">
 	  </div>
 	  <div class="col">
 	    <h3 class="pt-3 pt-md-0">
@@ -27,7 +27,7 @@
 	      {{ .position }}
 	    </h4>
 	    <p>
-	      {{ .bio }}
+	      {{ read (sprintf "people/bios/%s.html" .id) | html }}
 	    </p>
 	  </div>
 	</div>

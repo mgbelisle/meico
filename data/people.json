@@ -2,13 +2,11 @@
     {
 	"name": "Meggie Belisle",
 	"position": "Founder and Director of Mei/Co",
-	"img": "/img/people/meggie-belisle.jpg",
-	"bio": "Meggie Belisle began her dance training at Suzanne's School of Dance in College Station, Texas. She has danced with Ingredients Dance Company (TX), Arise Dance Company (The Netherlands), Roxey Ballet (NJ), The Next Stage Project (NY), Awakening Movement (NY), Atmosphere (NY), and is currently a member of Ad Deum Dance Company in Houston, TX. In 2013, she graduated from Belhaven University with a BFA in modern dance. Meggie has also choreographed for and performed in the music videos Trace the Lines by Lizi Bailey and Summertime Anytime by Dannah. After a year of freelance work in NY, Meggie founded Mei/Co. Dance with the assistance of her amazing husband and wonderful mom. Meggie's deepest heart desire is to bring hope and healing to the hurting through the art of dance."
+	"id": "meggie-belisle"
     },
     {
 	"name": "Matt Belisle",
 	"position": "Tech Dude",
-	"img": "/img/people/matt-belisle.png",
-	"bio": "Matt likes making Meggie's dreams come true, and he helps her with techie stuff like this website! Matt likes being in the mountains, exploiting web application security vulnerabilites, writing distrubuted fault tolerant systems in functional programming languages, using crypto libraries, and drinking oatmeal stout beer."
+	"id": "matt-belisle"
     }
 ]
