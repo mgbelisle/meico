@@ -1,11 +1,11 @@
 # meico
 
-Source code for https://meico.dance
+Source code for https://www.meico.dance
 
 ## Local dev
 
 ```sh
-go run utils/build.go --addr=:8080
+go run utils/build/main.go --addr=:8080
 ```
 
 ## Deployment
@@ -19,3 +19,4 @@ go run utils/build.go --addr=:8080
 * https://ipfs.io
 * https://golang.org
 * https://www.nginx.com
+* https://getbootstrap.com
