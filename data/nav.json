@@ -42,6 +42,7 @@
 		"text": "Auditions"
 	    },
 	    {
+		"skip": true,
 		"url": "/about/testimonials/",
 		"text": "Testimonials"
 	    }
