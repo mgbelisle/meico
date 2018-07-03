@@ -4,9 +4,9 @@
   <img src="{{ template "banner-img-mobile" . }}" alt="{{ template "banner-img-mobile" . }}" class="w-100 d-inline-block d-lg-none">
   <div class="{{ block "banner-class" . }}{{ end }} position-absolute text-center center w-100">
     {{/* Do display-* for large, h* for less. There is probably a better way to do this with css but I am lazy. */}}
-    <h1 class="banner-h display-1 mt-5 d-lg-block d-none">{{ template "banner-h1" . }}</h1>
+    <h1 class="banner-h display-1 mt-5 d-lg-block d-none">{{ block "banner-h1" . }}{{ end }}</h1>
     <h3 class="banner-h display-3 d-lg-block d-none">{{ block "banner-h2" . }}{{ end }}</h3>
-    <h1 class="banner-h mt-5 d-lg-none">{{ template "banner-h1" . }}</h1>
+    <h1 class="banner-h mt-5 d-lg-none">{{ block "banner-h1" . }}{{ end }}</h1>
     <h3 class="banner-h d-lg-none">{{ block "banner-h2" . }}{{ end }}</h3>
   </div>
 </div>
