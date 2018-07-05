@@ -46,6 +46,10 @@
 		"text": "Our Work"
 	    },
 	    {
+		"url": "/about/programs/",
+		"text": "Programs"
+	    },
+	    {
 		"url": "/about/auditions/",
 		"text": "Auditions"
 	    }
