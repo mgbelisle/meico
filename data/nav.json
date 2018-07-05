@@ -42,6 +42,10 @@
 		"text": "Testimonials"
 	    },
 	    {
+		"url": "/about/work/",
+		"text": "Our Work"
+	    },
+	    {
 		"url": "/about/auditions/",
 		"text": "Auditions"
 	    }
