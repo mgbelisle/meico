@@ -38,13 +38,12 @@
 		"text": "Our Name"
 	    },
 	    {
-		"url": "/about/auditions/",
-		"text": "Auditions"
-	    },
-	    {
-		"skip": true,
 		"url": "/about/testimonials/",
 		"text": "Testimonials"
+	    },
+	    {
+		"url": "/about/auditions/",
+		"text": "Auditions"
 	    }
 	]
     },
