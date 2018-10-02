@@ -1,0 +1,17 @@
+{{ define "banner-h2" }}Contributions{{ end }}
+{{ define "banner-img" }}{{ call .URL "/img/banners/home.jpg" }}{{ end }}
+{{ define "banner-img-mobile" }}{{ call .URL "/img/banners/home-mobile.jpg" }}{{ end }}
+{{ define "banner-class" }}text-white{{ end }}
+{{ define "banner" }}
+{{ template "banner-tmpl" . }}
+{{ end }}
+
+{{ block "content" . }}
+<div class="my-5">
+  <h2>Contributions</h2>
+  <p>Thank you for donating to the work and mission of Mei/Co. Dance. All contributions are tax deductable because we have 501(c)(3) status via Fractured Atlas.<p>
+  <p>For online donations, please follow the link below:</p>
+  <p><a href="https://www.fracturedatlas.org/site/fiscal/donate_noscript_form?fs_project_id=17688">https://www.fracturedatlas.org/site/fiscal/donate_noscript_form?fs_project_id=17688</a></p>
+  <p>For checks, please write the check to <b>Fractured Atlas</b>, not Meggie Belisle nor Mei/Co. Dance. This is important to keep our 501c3 status.</p>
+</div>
+{{ end }}

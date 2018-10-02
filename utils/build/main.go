@@ -252,6 +252,9 @@ func build(errLogFunc func(error)) {
 					}
 					if err := tmpl2.Execute(outFile, &TemplateData{
 						URL: func(url string) (string, error) {
+							if strings.HasPrefix(url, "http://") || strings.HasPrefix(url, "https://") {
+								return url, nil
+							}
 							fromSlash := filepath.FromSlash(url)
 							stat := fromSlash
 							if filepath.IsAbs(stat) {
@@ -271,6 +274,9 @@ func build(errLogFunc func(error)) {
 						Active: func(url string) (bool, error) {
 							if url == "/" {
 								return relPath == "index.html", nil
+							}
+							if strings.HasPrefix(url, "http://") || strings.HasPrefix(url, "https://") {
+								return false, nil
 							}
 							fromSlash := filepath.FromSlash(url)
 							if filepath.IsAbs(fromSlash) {
