@@ -1,0 +1,17 @@
+{{ define "banner-h1" }}Audio Transcripts{{ end }}
+{{ define "banner-img" }}{{ call .URL "/img/banners/events-future.png" }}{{ end }}
+{{ define "banner-img-mobile" }}{{ call .URL "/img/banners/events-future-mobile.png" }}{{ end }}
+{{ define "banner-class" }}text-white{{ end }}
+{{ define "banner" }}
+{{ template "banner-tmpl" . }}
+{{ end }}
+
+{{ block "content" . }}
+<div class="my-5">
+  <ul class="list-group">
+    <li class="list-group-item">
+      <span class="h1"><a href="{{ call .URL "/transcripts/i-am-home-now/" }}">I Am Home Now</a> - Bill Scarmardo</span>
+    </li>
+  </ul>
+</div>
+{{ end }}

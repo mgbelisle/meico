@@ -66,6 +66,10 @@
 	    {
 		"url": "/gallery/videos/",
 		"text": "Videos"
+	    },
+	    {
+		"url": "/transcripts/",
+		"text": "Audio Transcripts"
 	    }
 	]
     },
