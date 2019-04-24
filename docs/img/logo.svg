@@ -1,0 +1,12 @@
+<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+  <path d="M 5 95
+	   L 5 50
+	   A 45 45, 0, 1, 1, 50 95
+           Z"
+	fill="white"
+	stroke="grey"
+	stroke-width="4" />
+  <text x="25" y="70" font-family="Verdana" font-size="50" fill="grey">
+    明
+  </text>
+</svg>

@@ -27,7 +27,7 @@ OPTIONS:
 
 var (
 	inFlag        = flag.String("in", "src", "Input dir")
-	outFlag       = flag.String("out", "www", "Output dir")
+	outFlag       = flag.String("out", "docs", "Output dir")
 	dataFlag      = flag.String("data", "data", "Data dir (for json data)")
 	templatesFlag = flag.String("templates", "templates/base.html templates", "String separated list of template files/dirs. The first one is the base template (required)")
 	verboseFlag   = flag.Bool("verbose", false, "Verbose output")

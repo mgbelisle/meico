@@ -3,9 +3,8 @@
 <div class="container my-5">
   <div class="row">
     {{ range $_ := json "gallery/videos.json" }}
-    {{ $url := call $dot.URL (sprintf "/img/gallery/videos/%s" .file) }}
     <div class="col col-lg-6 col-12 mb-3 align-self-center text-center">
-      <video controls src="{{ $url }}" class="w-100 img-thumbnail">
+      <video controls src="{{ .src }}" class="w-100 img-thumbnail">
 	Sorry, your browser does not support embedded videos.
       </video>
       <h1>{{ .name }}</h1>
