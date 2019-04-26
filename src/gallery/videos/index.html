@@ -9,6 +9,7 @@
       </video>
       <h1>{{ .name }}</h1>
       {{ with .description }}<p>{{ . }}</p>{{ end }}
+      {{ with .descriptionHtml }}<p>{{ html . }}</p>{{ end }}
     </div>
     {{ end }}
   </div>
