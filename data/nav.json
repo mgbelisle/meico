@@ -70,7 +70,11 @@
 	    {
 		"url": "/gallery/transcripts/",
 		"text": "Audio Transcripts"
-	    }
+	    },
+	    {
+		"url": "/gallery/news/",
+		"text": "In the News"
+	    }	    
 	]
     },
     {

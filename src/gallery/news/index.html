@@ -1,0 +1,16 @@
+{{ block "content" . }}
+{{ $dot := . }}
+<div class="my-5">
+  <ul class="list-group">
+    {{ range $_ := json "gallery/news.json" }}
+    <li class="list-group-item">
+      <h2>{{ .title }}</h2>
+      <h4>{{ .publisher }} ({{ .date }})</h4>
+      {{ range $_ := .hrefs}}
+      <p><a href="{{ . }}">{{ . }}</a></p>
+      {{ end }}
+    </li>
+    {{ end }}
+  </ul>
+</div>
+{{ end }}
