@@ -32,6 +32,7 @@ var (
 	templatesFlag = flag.String("templates", "templates/base.html templates", "String separated list of template files/dirs. The first one is the base template (required)")
 	verboseFlag   = flag.Bool("verbose", false, "Verbose output")
 	addrFlag      = flag.String("addr", "", "Address to serve output dir, if provided")
+	maxOpenFlag   = flag.Int("max-open", 100, "Max number of files to open at once")
 )
 
 type TemplateData struct {
@@ -69,9 +70,11 @@ var TemplateFuncs = template.FuncMap{
 }
 
 var (
-	logPrefix     = os.Args[0] + ": "
-	verboseLogger = log.New(ioutil.Discard, logPrefix, log.LstdFlags)
-	errLogger     = log.New(os.Stderr, logPrefix, log.LstdFlags)
+	logPrefix       = os.Args[0] + ": "
+	verboseLogger   = log.New(ioutil.Discard, logPrefix, log.LstdFlags)
+	errLogger       = log.New(os.Stderr, logPrefix, log.LstdFlags)
+	maxOpenInLimit  = make(chan struct{})
+	maxOpenOutLimit = make(chan struct{})
 )
 
 func main() {
@@ -86,6 +89,8 @@ func main() {
 	if *verboseFlag {
 		verboseLogger = log.New(os.Stdout, logPrefix, log.LstdFlags)
 	}
+	maxOpenInLimit = make(chan struct{}, *maxOpenFlag/2)
+	maxOpenOutLimit = make(chan struct{}, *maxOpenFlag/2)
 
 	// Build once
 	build(func(err error) {
@@ -227,12 +232,18 @@ func build(errLogFunc func(error)) {
 			wg.Add(1)
 			go func(path string, outPath string, info os.FileInfo) {
 				defer wg.Add(-1)
+				maxOpenOutLimit <- struct{}{}
 				outFile, err := os.OpenFile(outPath, os.O_WRONLY|os.O_CREATE, info.Mode())
+				defer func() {
+					if outFile != nil {
+						outFile.Close()
+					}
+					<-maxOpenOutLimit
+				}()
 				if err != nil {
 					errLogFunc(err)
 					return
 				}
-				defer outFile.Close()
 				rootPath, err := filepath.Rel(filepath.Dir(path), *inFlag)
 				if err != nil {
 					errLogFunc(err)
@@ -291,12 +302,18 @@ func build(errLogFunc func(error)) {
 					}
 				} else {
 					verboseLogger.Printf("Copying file: %s", path)
+					maxOpenInLimit <- struct{}{}
 					inFile, err := os.Open(path)
+					defer func() {
+						if inFile != nil {
+							inFile.Close()
+						}
+						<-maxOpenInLimit
+					}()
 					if err != nil {
 						errLogFunc(err)
 						return
 					}
-					defer inFile.Close()
 					if _, err := io.Copy(outFile, inFile); err != nil {
 						errLogFunc(err)
 						return
