@@ -12,6 +12,10 @@
 		"text": "Past Events"
 	    },
 	    {
+		"url": "/events/story-lane/",
+		"text": "Story Lane"
+	    },
+	    {
 		"url": "/events/future/",
 		"text": "Upcoming Events"
 	    }

@@ -1,0 +1,25 @@
+{{ define "banner-h1" }}Story Lane{{ end }}
+{{ define "banner-h2" }}A stroll through your neighborhood{{ end }}
+{{ define "banner-img" }}{{ call .URL "/img/banners/home.jpg" }}{{ end }}
+{{ define "banner-img-mobile" }}{{ call .URL "/img/banners/home-mobile.jpg" }}{{ end }}
+{{ define "banner-class" }}text-white{{ end }}
+{{ define "banner" }}
+{{ template "banner-tmpl" . }}
+{{ end }}
+
+{{ block "content" . }}
+<div class="my-5">
+  <p>Do you know if anyone in your neighborhood has cancer? Do you even know your neighbors? Mei/Co. dance wants to help you get to know your neighbors and serve those around you who are walking through a battle with cancer, have overcome the battle, or have lost a loved one to the fight. It is a true tragedy that our very neighbors may need our help and we do not even know their names! Through fellowship, food, and the art of dance, the mission of Story Lane is to unite neighborhoods to fight this terrible disease together.</p>
+
+  <h3>What does Story Lane look like?</h3>
+  <p>Story Lane is a unique dance performance that travels from one home to the next to tell the story of a life affected by cancer. The performance begins in the host house (or yard, or patio, etc) and travels to 2-3 other homes to complete the journey and tell the story. The performance is then followed up by a reception for neighbors to get to know each other and hopefully find out how they can best serve their neighbor affected by cancer.</p>
+
+  <h3>The way this works</h3>
+  <p>First, we need a host. If you or someone you know in your neighborhood has cancer, you are the perfect host! Simply fill out the google form below and we will take it from there!</p>
+  <p>From that point, we will set up an interview with the Guest of Honor and then begin building a new dance work to tell their unique journey.</p>
+  <p>Next, we get to know your neighbors with you and find 2-3 other people who would be willing to offer their lawn, garage, living room, backyard, etc, as a location for the performance.</p>
+  <p>After that, we walk through your neighborhood with you and invite your neighbors to the show!</p>
+  <p>Finally, we come and perform your unique version of Story Lane in your neighborhood and help your neighbors understand how they can best support you during your time of need.</p>
+  <p>Regardless of where you are in your journey, whether you are a survivor, have lost a loved one to cancer, or are still in the thick of it, we would be honored to get to know you. We look forward to telling your story and strolling through your neighborhood with you.</p>
+</div>
+{{ end }}
