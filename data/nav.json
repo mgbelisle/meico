@@ -12,12 +12,30 @@
 		"text": "Past Events"
 	    },
 	    {
-		"url": "/events/story-lane/",
+		"url": "/programs/story-lane/",
 		"text": "Story Lane"
 	    },
 	    {
 		"url": "/events/future/",
 		"text": "Upcoming Events"
+	    }
+	]
+    },
+    {
+	"url": "/programs/",
+	"text": "Programs",
+	"children": [
+	    {
+		"url": "/programs/story-lane/",
+		"text": "Story Lane"
+	    },
+	    {
+		"url": "/programs/university-engagement/",
+		"text": "University Engagement Program"
+	    },
+	    {
+		"url": "/programs/pre-professional-immersion/",
+		"text": "Pre Professional Immersion Program"
 	    }
 	]
     },
@@ -48,10 +66,6 @@
 	    {
 		"url": "/about/work/",
 		"text": "Our Work"
-	    },
-	    {
-		"url": "/about/programs/",
-		"text": "Programs"
 	    },
 	    {
 		"url": "/about/auditions/",
