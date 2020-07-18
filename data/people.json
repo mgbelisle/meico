@@ -10,29 +10,19 @@
 	"id": "chris-pinones"
     },
     {
-	"name": "Bria Greenwood",
+	"name": "Becky Nam",
 	"position": "Company Dancer",
-	"id": "bria-greenwood"
+	"id": "becky-nam"
     },
     {
-	"name": "Hannah Ruskan",
-	"position": "Company Dancer",
-	"id": "hannah-ruskan"
+	"name": "Hannah Ueckert",
+	"position": "Program Manager",
+	"id": "hannah-ueckert"
     },
     {
-	"name": "Nikki Sublet",
+	"name": "Hannah Mettler",
 	"position": "Company Dancer",
-	"id": "nikki-sublet"
-    },
-    {
-	"name": "Havilah Gilliand",
-	"position": "Company Dancer",
-	"id": "havilah-gilliand"
-    },
-    {
-	"name": "Megan Morrow",
-	"position": "Company Dancer",
-	"id": "megan-morrow"
+	"id": "hannah-mettler"
     },
     {
 	"name": "Darcie Perkins",
@@ -45,34 +35,19 @@
 	"id": "hannah-welch"
     },
     {
+	"name": "Bethany Sleebos",
+	"position": "Company Dancer",
+	"id": "bethany-sleebos"
+    },
+    {
+	"name": "Alisa Pinones",
+	"position": "Company Dancer",
+	"id": "alisa-pinones"
+    },
+    {
 	"name": "Madie Farmer",
 	"position": "Company Dancer",
 	"id": "madie-farmer"
-    },
-    {
-	"name": "Lauren Harrington",
-	"position": "Company Dancer",
-	"id": "lauren-harrington"
-    },
-    {
-	"name": "Rebecca Blackshear",
-	"position": "Company Dancer",
-	"id": "rebecca-blackshear"
-    },
-    {
-	"name": "Hannah Ueckert",
-	"position": "Company Dancer",
-	"id": "hannah-ueckert"
-    },
-    {
-	"name": "Becky Nam",
-	"position": "Company Dancer",
-	"id": "becky-nam"
-    },
-    {
-	"name": "Jasmine Horne",
-	"position": "Company Dancer",
-	"id": "jasmine-horne"
     },
     {
 	"name": "Matt Belisle",
