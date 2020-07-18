@@ -1,0 +1,13 @@
+{{ define "banner-h1" }}University Engagement Program{{ end }}
+{{ define "banner-img" }}{{ call .URL "/img/banners/about-programs.jpg" }}{{ end }}
+{{ define "banner-img-mobile" }}{{ call .URL "/img/banners/about-programs-mobile.jpg" }}{{ end }}
+{{ define "banner-class" }}text-white{{ end }}
+{{ define "banner" }}
+{{ template "banner-tmpl" . }}
+{{ end }}
+
+{{ block "content" . }}
+<div class="my-5">
+  <p>The University Engagement Program is a planning strategy to reach college students or recent graduates who may be interested in participating in Mei/Co. Dance summer projects. Our long term plan is to establish a consistent group of dancers at our home base for projects and bookings through the Fall and Spring while continually layering in new groups of dancers for summer projects. We hope that this will allow Mei/Co. to continue its work with those struggling with cancer year round and, at the same time, give college students exposure and experience. This influx of new dancers will also provide the opportunity for our Fall/Spring time dancers to rest during the summer season if they wish to do so. We also hope to engage in larger projects during the summer and may require larger casts for such undertakings. This preliminary trip to Belhaven University will take place in the spring of 2019.</p>
+</div>
+{{ end }}

@@ -1,0 +1,13 @@
+{{ define "banner-h1" }}Pre-Professional Immersion Program{{ end }}
+{{ define "banner-img" }}{{ call .URL "/img/banners/about-programs.jpg" }}{{ end }}
+{{ define "banner-img-mobile" }}{{ call .URL "/img/banners/about-programs-mobile.jpg" }}{{ end }}
+{{ define "banner-class" }}text-white{{ end }}
+{{ define "banner" }}
+{{ template "banner-tmpl" . }}
+{{ end }}
+
+{{ block "content" . }}
+<div class="my-5">
+  <p>The Pre-Professional Immersion Program is a educational outreach targeting high school students who wish to pursue a professional career in dance. Our goal is to accept four to eight high school students to participate in our summer projects for one to three weeks. These students will have the opportunity to take class with professional and collegiate level dancers, understudy and participate in rehearsals, receive individual mentoring from members of Mei/Co. Dance, learn about the heart and mission of Mei/Co., and perform in the final shows. This initiative is a work in progress as we begin establishing our home in the Houston area. Our goal is to engage with two or three local studios to offer this opportunity to students.</p>
+</div>
+{{ end }}
