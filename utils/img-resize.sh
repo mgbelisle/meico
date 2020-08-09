@@ -2,7 +2,7 @@
 # https://guides.wp-bullet.com/batch-resize-images-using-linux-command-line-and-imagemagick/
 
 # absolute path to image folder
-FOLDER="src/img"
+FOLDER="$HOME/Desktop"
 
 # max height
 WIDTH=1024
