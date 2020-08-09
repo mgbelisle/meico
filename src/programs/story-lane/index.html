@@ -24,4 +24,16 @@
 
   <p><a href="https://forms.gle/qmHAivfp5mabBsC79" class="btn btn-secondary">Apply to share your story through Story Lane</a></p>
 </div>
+
+{{ $dot := . }}
+<div class="container my-5">
+  <div class="row">
+    {{ range $_ := json "programs/story-lane/photos.json" }}
+    {{ $url := call $dot.URL (sprintf "/img/programs/story-lane/%s" .) }}
+    <div class="col col-lg-3 col-12 mb-3 align-self-center">
+      <a href="{{ $url }}"><img src="{{ $url }}" alt="{{ . }}" class="w-100 img-thumbnail"></a>
+    </div>
+    {{ end }}
+  </div>
+</div>
 {{ end }}
