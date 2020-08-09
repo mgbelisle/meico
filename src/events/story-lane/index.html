@@ -1,0 +1,18 @@
+{{ define "banner-h1" }}Story Lane{{ end }}
+{{ define "banner-h2" }}A stroll through your neighborhood{{ end }}
+{{ define "banner-img" }}{{ call .URL "/img/banners/events-story-lane.jpg" }}{{ end }}
+{{ define "banner-img-mobile" }}{{ call .URL "/img/banners/events-story-lane-mobile.jpg" }}{{ end }}
+{{ define "banner-class" }}text-white{{ end }}
+{{ define "banner" }}
+{{ template "banner-tmpl" . }}
+{{ end }}
+
+{{ block "content" . }}
+<div class="my-5">
+  <h2>Story Lane</h2>
+  <h3>A Christmas stroll down Greenleaf Ln</h3>
+  <p>December 2020</p>
+  <p>More info coming soon!</p>
+  <p><p><a href="https://forms.gle/Ly9j7gBSwc3hDsgLA">Dancer info &amp; registration</a></p></p>
+</div>
+{{ end }}
