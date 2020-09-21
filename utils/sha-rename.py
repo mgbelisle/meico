@@ -13,6 +13,8 @@ for root, dnames, fnames in os.walk(photos_dir):
     for fname in fnames:
         base, ext = os.path.splitext(fname)
         ext = ext.lower()
+        if ext == '.jpeg':
+            ext = '.jpg'
         with open(os.path.join(root, fname), 'rb') as fhandle:
             img = fhandle.read()
         hash = sha1(img).hexdigest()
