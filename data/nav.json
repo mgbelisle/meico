@@ -1,115 +1,111 @@
 [
-    {
-	"url": "/",
-	"text": "Home"
-    },
-    {
-	"url": "/events/",
-	"text": "Events",
-	"children": [
-	    {
-		"url": "/events/past/",
-		"text": "Past Events"
-	    },
-	    {
-		"url": "/events/story-lane/",
-		"text": "Story Lane"
-	    },
-	    {
-		"url": "/events/future/",
-		"text": "Upcoming Events"
-	    }
-	]
-    },
-    {
-	"url": "/programs/",
-	"text": "Programs",
-	"children": [
-	    {
-		"url": "/programs/story-lane/",
-		"text": "Story Lane"
-	    },
-	    {
-		"url": "/programs/class-on-the-grass/",
-		"text": "Class on the Grass"
-	    },
-	    {
-		"url": "/programs/university-engagement/",
-		"text": "University Engagement Program"
-	    },
-	    {
-		"url": "/programs/pre-professional-immersion/",
-		"text": "Pre Professional Immersion Program"
-	    }
-	]
-    },
-    {
-	"url": "/about/",
-	"text": "About",
-	"children": [
-	    {
-		"url": "/about/story/",
-		"text": "Our Story"
-	    },
-	    {
-		"url": "/about/people/",
-		"text": "Our People"
-	    },
-	    {
-		"url": "/about/mission/",
-		"text": "Our Mission"
-	    },
-	    {
-		"url": "/about/name/",
-		"text": "Our Name"
-	    },
-	    {
-		"url": "/about/testimonials/",
-		"text": "Testimonials"
-	    },
-	    {
-		"url": "/about/work/",
-		"text": "Our Work"
-	    },
-	    {
-		"url": "/about/auditions/",
-		"text": "Auditions"
-	    }
-	]
-    },
-    {
-	"url": "/gallery/",
-	"text": "Gallery",
-	"children": [
-	    {
-		"url": "/gallery/photos/",
-		"text": "Photos"
-	    },
-	    {
-		"url": "/gallery/videos/",
-		"text": "Videos"
-	    },
-	    {
-		"url": "/gallery/transcripts/",
-		"text": "Audio Transcripts"
-	    },
-	    {
-		"url": "/gallery/news/",
-		"text": "In the News"
-	    }	    
-	]
-    },
-    {
-	"skip": true,
-	"url": "/booking/",
-	"text": "Booking"
-    },
-    {
-	"url": "/contribute/",
-	"text": "Contribute"
-    },
-    {
-	"url": "/contact/",
-	"text": "Contact"
-    }
+	{
+		"url": "/",
+		"text": "Home"
+	},
+	{
+		"url": "/events/",
+		"text": "Events",
+		"children": [
+			{
+				"url": "/events/past/",
+				"text": "Past Events"
+			},
+			{
+				"url": "/events/future/",
+				"text": "Upcoming Events"
+			}
+		]
+	},
+	{
+		"url": "/programs/",
+		"text": "Programs",
+		"children": [
+			{
+				"url": "/programs/story-lane/",
+				"text": "Story Lane"
+			},
+			{
+				"url": "/programs/class-on-the-grass/",
+				"text": "Class on the Grass"
+			},
+			{
+				"url": "/programs/university-engagement/",
+				"text": "University Engagement Program"
+			},
+			{
+				"url": "/programs/pre-professional-immersion/",
+				"text": "Pre Professional Immersion Program"
+			}
+		]
+	},
+	{
+		"url": "/about/",
+		"text": "About",
+		"children": [
+			{
+				"url": "/about/story/",
+				"text": "Our Story"
+			},
+			{
+				"url": "/about/people/",
+				"text": "Our People"
+			},
+			{
+				"url": "/about/mission/",
+				"text": "Our Mission"
+			},
+			{
+				"url": "/about/name/",
+				"text": "Our Name"
+			},
+			{
+				"url": "/about/testimonials/",
+				"text": "Testimonials"
+			},
+			{
+				"url": "/about/work/",
+				"text": "Our Work"
+			},
+			{
+				"url": "/about/auditions/",
+				"text": "Auditions"
+			}
+		]
+	},
+	{
+		"url": "/gallery/",
+		"text": "Gallery",
+		"children": [
+			{
+				"url": "/gallery/photos/",
+				"text": "Photos"
+			},
+			{
+				"url": "/gallery/videos/",
+				"text": "Videos"
+			},
+			{
+				"url": "/gallery/transcripts/",
+				"text": "Audio Transcripts"
+			},
+			{
+				"url": "/gallery/news/",
+				"text": "In the News"
+			}
+		]
+	},
+	{
+		"skip": true,
+		"url": "/booking/",
+		"text": "Booking"
+	},
+	{
+		"url": "/contribute/",
+		"text": "Contribute"
+	},
+	{
+		"url": "/contact/",
+		"text": "Contact"
+	}
 ]
