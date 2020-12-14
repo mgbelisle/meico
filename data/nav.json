@@ -102,7 +102,17 @@
 	},
 	{
 		"url": "/contribute/",
-		"text": "Contribute"
+		"text": "Contribute",
+		"children": [
+			{
+				"url": "/contribute/sandals/",
+				"text": "Little Foot Sandals"
+			},
+			{
+				"url": "/contribute/",
+				"text": "Donations"
+			}
+		]
 	},
 	{
 		"url": "/contact/",
