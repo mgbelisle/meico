@@ -50,3 +50,7 @@ body {
 .banner-h {
     font-family: 'Shadows Into Light', cursive;
 }
+
+.list-group-item {
+    border: none;
+}
