@@ -36,19 +36,15 @@ footer {
 }
 
 body {
-    font-family: Garamond;
+    font-family: 'Shadows Into Light', Garamond;
 }
 
 .tooltip {
-    font-family: Garamond;
+    font-family: 'Shadows Into Light', Garamond;
 }
 
 .popover {
-    font-family: Garamond;
-}
-
-.banner-h {
-    font-family: 'Shadows Into Light', cursive;
+    font-family: 'Shadows Into Light', Garamond;
 }
 
 .list-group-item {
