@@ -8,7 +8,17 @@
 
 {{ block "content" . }}
 <div class="my-5">
-  <p>Thank you for donating to the work and mission of Mei/Co. Dance. You can give through Venmo <a href="https://venmo.com/meico-dance">here</a> or through Fractured Atlas <a href="https://fundraising.fracturedatlas.org/mei-co-dance">here</a>. All contributions made through fractured Atlas are tax deductible via their 501(c)(3) covering.<p>
+  <p>Thank you for donating to the work and mission of Mei/Co. Dance. All contributions made through Fractured Atlas are automatically deductible tax deductible via their 501(c)(3) covering. For tax deductions on the other payment platforms just ask us for a letter.<p>
+  <p class="container">
+    <div class="row">
+      <div class="col col-6">
+	<a href="https://venmo.com/meico-dance" class="btn btn-light w-100 text-center"><img src="{{ call .URL "/img/sha1/b34b4da6d9c9487072a2510c557702dbc471fc30.svg" }}" alt="Venmo" class="icon" /> Donate with Venmo</a>
+      </div>
+      <div class="col col-6">
+	<a href="https://fundraising.fracturedatlas.org/mei-co-dance" class="btn btn-light w-100 text-center"><img src="{{ call .URL "/img/sha1/788f68f35dd9e15ff74787ff16140940e21ca182.png" }}" alt="Venmo" class="icon" /> Donate with Fractured Atlas</a>
+      </div>
+    </div>
+  </p>
   <p>For checks, please write the check to <b>Fractured Atlas</b>, not Meggie Belisle nor Mei/Co. Dance. This is important to keep our 501(c)(3) status.</p>
 </div>
 {{ end }}
