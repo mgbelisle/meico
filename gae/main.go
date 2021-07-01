@@ -10,16 +10,17 @@ import (
 
 func main() {
 	// Load configs
-	configBytes, err := os.ReadFile("configs/prod.json")
-	if err != nil {
-		panic(err)
-	}
 	configs := struct {
 		StripeSecretKey string `json:"stripeSecretKey"`
 	}{}
-	if err := json.Unmarshal(configBytes, &configs); err != nil {
+	configFile, err := os.Open("configs/prod.json")
+	if err != nil {
 		panic(err)
 	}
+	if err := json.NewDecoder(configFile).Decode(&configs); err != nil {
+		panic(err)
+	}
+	configFile.Close()
 
 	// Allow all origins
 	cors := func(h http.HandlerFunc) http.HandlerFunc {
