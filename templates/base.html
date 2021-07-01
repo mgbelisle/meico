@@ -97,5 +97,7 @@
     <script src="{{ call .URL "/js/main.js" }}"></script>
     {{ end }}
     {{ end }}
+    {{ block "body-end" . }}
+    {{ end }}
   </body>
 </html>
