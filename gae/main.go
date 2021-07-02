@@ -39,11 +39,14 @@ func main() {
 	}
 
 	// Create a stripe charge
-	http.HandleFunc("/stripe/v1/charges", cors(func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/stripe/v1/payment_intents", cors(func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case "POST":
-			stripeReq, _ := http.NewRequest("POST", "https://api.stripe.com/v1/charges", r.Body)
+			stripeReq, _ := http.NewRequest("POST", "https://api.stripe.com/v1/payment_intents", r.Body)
 			stripeReq.Header.Set("Authorization", "Bearer "+configs.StripeSecretKey)
+			if contentType := r.Header.Get("Content-Type"); contentType != "" {
+				stripeReq.Header.Set("Content-Type", contentType)
+			}
 			stripeResp, err := http.DefaultClient.Do(stripeReq)
 			if err != nil {
 				http.Error(w, err.Error(), http.StatusInternalServerError)

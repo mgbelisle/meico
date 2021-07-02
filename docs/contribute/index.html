@@ -305,6 +305,9 @@
   <p class="container">
     <div class="row">
       <div class="col col-6">
+        <div id="payment-request-button">
+          
+        </div>
       </div>
       <div class="col col-6">
 	<a href="https://fundraising.fracturedatlas.org/mei-co-dance" class="btn btn-light w-100 text-center"><img src="../img/sha1/b98b801d3a3990267855fff7f1c14aaa82d831cf.png" alt="PayPal" class="icon" /> Donate with PayPal</a>
@@ -349,6 +352,80 @@
     
     
 <script src="https://js.stripe.com/v3/"></script>
+<script>
+  (async () => {
+    const stripe = Stripe('pk_test_51J8XRYEFDQQA3h4C30s4aoHtdgN7MfmlWLdXxDtZX2vVkdEdDPM959JKRmwjSddZAPOneD4GtnUto9iNtDQXduEi00MUljgS0G', {
+      apiVersion: "2020-08-27",
+    });
+    const paymentRequest = stripe.paymentRequest({
+      country: 'US',
+      currency: 'usd',
+      total: {
+        label: 'Donate to Mei/Co. Dance',
+        amount: 1000,
+      },
+      requestPayerName: true,
+      requestPayerEmail: true,
+    });
+    const elements = stripe.elements();
+    const prButton = elements.create('paymentRequestButton', {
+      paymentRequest,
+    });
+    (async () => {
+      
+      const result = await paymentRequest.canMakePayment();
+      if (result) {
+        prButton.mount('#payment-request-button');
+      } else {
+        console.log('Cannot make payment');
+        document.getElementById('payment-request-button').style.display = 'none';
+      }
+    })();
+    const resp = await (await fetch(
+      'https://jovial-evening-318521.appspot.com/stripe/v1/payment_intents',
+      {
+        'method': 'POST',
+        'body': new URLSearchParams({
+          'amount': '1000',
+          'currency': 'usd',
+        }),
+      },
+    )).json();
+    const clientSecret = resp.client_secret;
+    paymentRequest.on('paymentmethod', async (ev) => {
+      
+      const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
+        clientSecret,
+        { payment_method: ev.paymentMethod.id },
+        { handleActions: false }
+      );
+      if (confirmError) {
+        
+        
+        
+        ev.complete('fail');
+      } else {
+        
+        
+        ev.complete('success');
+        
+        
+        
+        if (paymentIntent.status === "requires_action") {
+          
+          const { error } = await stripe.confirmCardPayment(clientSecret);
+          if (error) {
+            
+          } else {
+            
+          }
+        } else {
+          
+        }
+      }
+    });
+  })();
+</script>
 
   </body>
 </html>
