@@ -398,14 +398,6 @@
         requestPayerName: true,
         requestPayerEmail: true,
       });
-      
-      if (await paymentRequest.canMakePayment()) {
-        paymentRequestButton.mount('#payment-request-button');
-      } else {
-        Array.from(document.getElementsByClassName('payment-request')).forEach(e => {
-          e.style.display = 'none';
-        });
-      }
       const elements = stripe.elements();
       const paymentRequestButton = elements.create('paymentRequestButton', {
         paymentRequest,
@@ -417,6 +409,14 @@
           },
         },
       });
+      
+      if (await paymentRequest.canMakePayment()) {
+        paymentRequestButton.mount('#payment-request-button');
+      } else {
+        Array.from(document.getElementsByClassName('payment-request')).forEach(e => {
+          e.style.display = 'none';
+        });
+      }
       const resp = await (await fetch(
         'https://jovial-evening-318521.appspot.com/stripe/v1/payment_intents',
         {
