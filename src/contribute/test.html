@@ -81,6 +81,13 @@
     const elements = stripe.elements();
     const paymentRequestButton = elements.create('paymentRequestButton', {
       paymentRequest,
+      style: {
+        paymentRequestButton: {
+          type: 'donate',
+          theme: 'light',
+          height: '46px',
+        },
+      },
     });
 
     const postPaymentIntent = async (amount) => {
