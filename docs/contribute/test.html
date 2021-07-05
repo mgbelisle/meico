@@ -308,35 +308,32 @@
     
   </p>
   <p class="payment-requesttodo">
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="2000" checked>
-      <label class="form-check-label" for="exampleRadios1">
-        $20
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="5000">
-      <label class="form-check-label" for="exampleRadios2">
-        $50
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="10000">
-      <label class="form-check-label" for="exampleRadios2">
-        $100
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2">
-      <label class="form-check-label" for="exampleRadios2">
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">@</span>
-          </div>
-          <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <input type="radio" aria-label="Radio button for $10" value="1000" name="amount" checked>
         </div>
-        
-      </label>
+      </div>
+      <input type="text" class="form-control" aria-label="$20" value="$10.00" readonly>
+    </div>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <input type="radio" aria-label="Radio button for $100" value="10000" name="amount">
+        </div>
+      </div>
+      <input type="text" class="form-control" aria-label="$100" value="$100.00" readonly>
+    </div>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <input type="radio" aria-label="Radio button for other amount" name="amount">
+        </div>
+      </div>
+      <div class="input-group-prepend">
+        <span class="input-group-text">Other: $</span>
+      </div>
+      <input type="number" class="form-control" aria-label="Other amount" min="1" name="amount">
     </div>
   </p>
   <p class="text-center">
