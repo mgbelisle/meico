@@ -398,6 +398,14 @@
         requestPayerName: true,
         requestPayerEmail: true,
       });
+      
+      if (await paymentRequest.canMakePayment()) {
+        paymentRequestButton.mount('#payment-request-button');
+      } else {
+        Array.from(document.getElementsByClassName('payment-request')).forEach(e => {
+          e.style.display = 'none';
+        });
+      }
       const elements = stripe.elements();
       const paymentRequestButton = elements.create('paymentRequestButton', {
         paymentRequest,
@@ -453,18 +461,7 @@
         }
       });
     };
-    (async () => {
-      
-      const result = await paymentRequest.canMakePayment();
-      if (result) {
-        postPaymentIntent(document.getElementsByClassName('amount-radio')[0].value);
-        paymentRequestButton.mount('#payment-request-button');
-      } else {
-        Array.from(document.getElementsByClassName('payment-request')).forEach(e => {
-          e.style.display = 'none';
-        });
-      }
-    })();
+    postPaymentIntent(document.getElementsByClassName('amount-radio')[0].value);
     Array.from(document.getElementsByClassName('amount-radio')).forEach(input => {
       input.addEventListener('click', () => postPaymentIntent(input.value));
     });
