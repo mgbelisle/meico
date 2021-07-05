@@ -91,8 +91,8 @@
     });
 
     const postPaymentIntent = async (amount) => {
-      console.log(amount);
-      const resp = await(await fetch(
+      // console.log(amount);
+      const resp = await (await fetch(
         'https://jovial-evening-318521.appspot.com/stripe/v1/payment_intents',
         {
           'method': 'POST',
@@ -128,10 +128,10 @@
             if (error) {
               alert(error);
             } else {
-              // The payment has succeeded.
+              alert('Thanks for your donation!');
             }
           } else {
-            // The payment has succeeded.
+            alert('Thanks for your donation!');
           }
         }
       });
