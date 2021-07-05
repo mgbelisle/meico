@@ -119,7 +119,7 @@
             // Let Stripe.js handle the rest of the payment flow.
             const { error } = await stripe.confirmCardPayment(clientSecret);
             if (error) {
-              // The payment failed -- ask your customer for a new payment method.
+              alert(error);
             } else {
               // The payment has succeeded.
             }
