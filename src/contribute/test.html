@@ -11,9 +11,28 @@
   <p>Thank you for donating to the work and mission of Mei/Co. Dance. All contributions made through Fractured Atlas are
     automatically deductible tax deductible via their 501(c)(3) covering. For tax deductions on the other payment
     platforms just ask us for a letter.</p>
-  <p class="text-center" id="payment-request-button">
+  <p class="text-center" id="payment-request-button" data-toggle="modal" data-target="#payment-request-modal">
     <!-- A Stripe Element will be inserted here. -->
   </p>
+  <div class="modal fade" id="payment-request-modal" tabindex="-1" role="dialog" aria-labelledby="payment-request-modal-label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="payment-request-modal-label">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <p class="text-center">
     <a href="https://fundraising.fracturedatlas.org/mei-co-dance" class="btn btn-light w-100 text-center"><img
       src="{{ call .URL "/img/sha1/b98b801d3a3990267855fff7f1c14aaa82d831cf.png" }}" alt="PayPal" class="icon" />
