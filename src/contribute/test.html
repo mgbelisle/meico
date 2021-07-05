@@ -18,7 +18,7 @@
     <div class="input-group">
       <div class="input-group-prepend">
         <div class="input-group-text">
-          <input type="radio" aria-label="Radio button for $10" value="1000" name="amount" checked>
+          <input type="radio" aria-label="Radio button for $10" value="1000" name="amount" checked class="amount-radio">
         </div>
       </div>
       <input type="text" class="form-control" aria-label="$20" value="$10.00" readonly>
@@ -26,7 +26,7 @@
     <div class="input-group">
       <div class="input-group-prepend">
         <div class="input-group-text">
-          <input type="radio" aria-label="Radio button for $100" value="10000" name="amount">
+          <input type="radio" aria-label="Radio button for $100" value="10000" name="amount" class="amount-radio">
         </div>
       </div>
       <input type="text" class="form-control" aria-label="$100" value="$100.00" readonly>
@@ -93,48 +93,56 @@
         });
       }
     })();
-    const resp = await (await fetch(
-      'https://jovial-evening-318521.appspot.com/stripe/v1/payment_intents',
-      {
-        'method': 'POST',
-        'body': new URLSearchParams({
-          'amount': '1000',
-          'currency': 'usd',
-        }),
-      },
-    )).json();
-    const clientSecret = resp.client_secret;
-    paymentRequest.on('paymentmethod', async (ev) => {
-      // Confirm the PaymentIntent without handling potential next actions (yet).
-      const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
-        clientSecret,
-        { payment_method: ev.paymentMethod.id },
-        { handleActions: false }
-      );
-      if (confirmError) {
-        // Report to the browser that the payment failed, prompting it to
-        // re-show the payment interface, or show an error message and close
-        // the payment interface.
-        ev.complete('fail');
-      } else {
-        // Report to the browser that the confirmation was successful, prompting
-        // it to close the browser payment method collection interface.
-        ev.complete('success');
-        // Check if the PaymentIntent requires any actions and if so let Stripe.js
-        // handle the flow. If using an API version older than "2019-02-11"
-        // instead check for: `paymentIntent.status === "requires_source_action"`.
-        if (paymentIntent.status === "requires_action") {
-          // Let Stripe.js handle the rest of the payment flow.
-          const { error } = await stripe.confirmCardPayment(clientSecret);
-          if (error) {
-            // The payment failed -- ask your customer for a new payment method.
+    var amount = '1000';
+    const postPaymentIntent = async () => {
+      const resp = await(await fetch(
+        'https://jovial-evening-318521.appspot.com/stripe/v1/payment_intents',
+        {
+          'method': 'POST',
+          'body': new URLSearchParams({
+            'amount': amount,
+            'currency': 'usd',
+          }),
+        },
+      )).json();
+      console.log(resp);
+      const clientSecret = resp.client_secret;
+      paymentRequest.on('paymentmethod', async (ev) => {
+        // Confirm the PaymentIntent without handling potential next actions (yet).
+        const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
+          clientSecret,
+          { payment_method: ev.paymentMethod.id },
+          { handleActions: false }
+        );
+        if (confirmError) {
+          // Report to the browser that the payment failed, prompting it to
+          // re-show the payment interface, or show an error message and close
+          // the payment interface.
+          ev.complete('fail');
+        } else {
+          // Report to the browser that the confirmation was successful, prompting
+          // it to close the browser payment method collection interface.
+          ev.complete('success');
+          // Check if the PaymentIntent requires any actions and if so let Stripe.js
+          // handle the flow. If using an API version older than "2019-02-11"
+          // instead check for: `paymentIntent.status === "requires_source_action"`.
+          if (paymentIntent.status === "requires_action") {
+            // Let Stripe.js handle the rest of the payment flow.
+            const { error } = await stripe.confirmCardPayment(clientSecret);
+            if (error) {
+              // The payment failed -- ask your customer for a new payment method.
+            } else {
+              // The payment has succeeded.
+            }
           } else {
             // The payment has succeeded.
           }
-        } else {
-          // The payment has succeeded.
         }
-      }
+      });
+    };
+    postPaymentIntent();
+    Array.from(document.getElementsByClassName('amount-radio')).forEach(input => {
+      input.addEventListener('click', postPaymentIntent);
     });
   })();
 </script>
