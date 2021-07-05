@@ -385,30 +385,30 @@
     const stripe = Stripe('pk_test_51J8XRYEFDQQA3h4C30s4aoHtdgN7MfmlWLdXxDtZX2vVkdEdDPM959JKRmwjSddZAPOneD4GtnUto9iNtDQXduEi00MUljgS0G', {
       apiVersion: "2020-08-27",
     });
-    const paymentRequest = stripe.paymentRequest({
-      country: 'US',
-      currency: 'usd',
-      total: {
-        label: 'Donate to Mei/Co. Dance',
-        amount: 1000,
-      },
-      requestPayerName: true,
-      requestPayerEmail: true,
-    });
-    const elements = stripe.elements();
-    const paymentRequestButton = elements.create('paymentRequestButton', {
-      paymentRequest,
-      style: {
-        paymentRequestButton: {
-          type: 'donate',
-          theme: 'light-outline',
-          height: '46px',
-        },
-      },
-    });
-
     const postPaymentIntent = async (amount) => {
       console.log(amount);
+      amount = parseInt(amount);
+      const paymentRequest = stripe.paymentRequest({
+        country: 'US',
+        currency: 'usd',
+        total: {
+          label: 'Donate to Mei/Co. Dance',
+          amount: amount,
+        },
+        requestPayerName: true,
+        requestPayerEmail: true,
+      });
+      const elements = stripe.elements();
+      const paymentRequestButton = elements.create('paymentRequestButton', {
+        paymentRequest,
+        style: {
+          paymentRequestButton: {
+            type: 'donate',
+            theme: 'light-outline',
+            height: '46px',
+          },
+        },
+      });
       const resp = await (await fetch(
         'https://jovial-evening-318521.appspot.com/stripe/v1/payment_intents',
         {
@@ -468,7 +468,7 @@
     Array.from(document.getElementsByClassName('amount-radio')).forEach(input => {
       input.addEventListener('click', () => postPaymentIntent(input.value));
     });
-    const amountOtherRadio = document.getElementById('amount-other-radio'); 
+    const amountOtherRadio = document.getElementById('amount-other-radio');
     const amountOtherText = document.getElementById('amount-other-text');
     amountOtherText.addEventListener('input', () => {
       amountOtherRadio.checked |= true;
