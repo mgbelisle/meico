@@ -304,27 +304,16 @@
   <p>Thank you for donating to the work and mission of Mei/Co. Dance. All contributions made through Fractured Atlas are
     automatically deductible tax deductible via their 501(c)(3) covering. For tax deductions on the other payment
     platforms just ask us for a letter.</p>
-  <p class="text-center" id="payment-request-button" data-toggle="modal" data-target="#payment-request-modal">
+  <p id="payment-request-button" class="payment-request">
     
   </p>
-  <div class="modal fade" id="payment-request-modal" tabindex="-1" role="dialog" aria-labelledby="payment-request-modal-label" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="payment-request-modal-label">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
+  <div class="input-group payment-request">
+    <div class="input-group-prepend">
+      <div class="input-group-text">
+        <input type="radio" aria-label="Radio button for following text input">
       </div>
     </div>
+    <input type="text" class="form-control" aria-label="Text input with radio button">
   </div>
   <p class="text-center">
     <a href="https://fundraising.fracturedatlas.org/mei-co-dance" class="btn btn-light w-100 text-center"><img
@@ -386,17 +375,18 @@
       requestPayerEmail: true,
     });
     const elements = stripe.elements();
-    const prButton = elements.create('paymentRequestButton', {
+    const paymentRequestButton = elements.create('paymentRequestButton', {
       paymentRequest,
     });
     (async () => {
       
       const result = await paymentRequest.canMakePayment();
       if (result) {
-        prButton.mount('#payment-request-button');
+        paymentRequestButton.mount('#payment-request-button');
       } else {
-        console.log('Cannot make payment');
-        document.getElementById('payment-request-button').style.display = 'none';
+        Array.from(document.getElementsByClassName('payment-request')).forEach(e => {
+          e.style.display = 'none';
+        });
       }
     })();
     const resp = await (await fetch(
