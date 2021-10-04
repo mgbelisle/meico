@@ -2,9 +2,6 @@
 {{ define "banner-img" }}{{ call .URL "/img/banners/home.jpg" }}{{ end }}
 {{ define "banner-img-mobile" }}{{ call .URL "/img/banners/home-mobile.jpg" }}{{ end }}
 {{ define "banner-class" }}text-white{{ end }}
-{{ define "banner" }}
-{{ template "banner-tmpl" . }}
-{{ end }}
 
 {{ block "content" . }}
 <div class="my-5">
