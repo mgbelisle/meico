@@ -24,7 +24,7 @@
 <div class="container my-5">
   <div class="row">
     {{ range $_ := json "programs/class-on-the-grass/photos.json" }}
-    {{ $url := call $dot.URL (sprintf "/img/sha1/%s" .) }}
+    {{ $url := call $dot.URL (sprintf "/sha1/%s" .) }}
     <div class="col col-lg-3 col-12 mb-3 align-self-center">
       <a href="{{ $url }}"><img src="{{ $url }}" alt="{{ . }}" class="w-100 img-thumbnail"></a>
     </div>

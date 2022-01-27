@@ -66,12 +66,12 @@
 			{
 				"url": "/about/work/",
 				"text": "Our Work"
-			},
-			{
-				"url": "/about/auditions/",
-				"text": "Auditions"
 			}
 		]
+	},
+	{
+		"url": "/auditions/",
+		"text": "Auditions"
 	},
 	{
 		"url": "/gallery/",

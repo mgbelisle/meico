@@ -3,7 +3,7 @@
 <div id="carousel-controls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
     {{ range $idx, $_ := json "gallery/photos.json" }}
-    {{ $url := call $dot.URL (sprintf "/img/sha1/%s" .) }}
+    {{ $url := call $dot.URL (sprintf "/sha1/%s" .) }}
     <div class="carousel-item {{ if eq $idx 0 }}active{{ else }}{{ end }}">
       <a href="{{ $url }}"><img src="{{ $url }}" alt="{{ . }}" class="d-block w-100"></a>
     </div>
@@ -21,7 +21,7 @@
 <div class="container my-5">
   <div class="row">
     {{ range $_ := json "gallery/photos.json" }}
-    {{ $url := call $dot.URL (sprintf "/img/sha1/%s" .) }}
+    {{ $url := call $dot.URL (sprintf "/sha1/%s" .) }}
     <div class="col col-lg-3 col-12 mb-3 align-self-center">
       <a href="{{ $url }}"><img src="{{ $url }}" alt="{{ . }}" class="w-100 img-thumbnail"></a>
     </div>

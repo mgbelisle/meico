@@ -8,6 +8,10 @@
 
 {{ block "content" . }}
 <div class="my-5">
+  <div class="col-lg-6 offset-lg-3 col-12">
+    <img src="{{ call .URL "/sha1/57a588155d2f463a19ab3b5f4c3a82c9e4c5981c.png" }}" alt="flyer" class="w-100 img-thumbnail">
+  </div>
+  <p class="text-center">For more information click <a href="{{ call .URL "/auditions" }}">here</a>.</p>
   <h2 class="text-center">Upcoming Events</h2>
   {{ template "events-future" . }}
   <a href="{{ call .URL "/about/mission/" }}"><h2>Our Mission</h2></a>
@@ -16,7 +20,7 @@
   <p class="container">
     <div class="row">
       <div class="col-lg-6 offset-lg-3 col-12 text-center">
-	<video controls poster="{{ call .URL "/img/sha1/b95d9ec8fc0967f27447d88e60d6060d0fb76217.png" }}" class="w-100 mb-3 img-thumbnail">
+	<video controls poster="{{ call .URL "/sha1/b95d9ec8fc0967f27447d88e60d6060d0fb76217.png" }}" class="w-100 mb-3 img-thumbnail">
           <source src="https://www.dropbox.com/s/7jxnn2x5emh1u4d/?raw=1" type="video/mp4">
             Sorry, your browser does not support embedded videos.
 	</video>
@@ -26,7 +30,7 @@
     </div>
     <div class="row">
       <div class="col-lg-6 offset-lg-3 col-12 text-center">
-	<video controls poster="{{ call .URL "/img/sha1/569f3a66fbd9a3d1e8c8a34724d6f17a792ccef0.png" }}" class="w-100 mb-3 img-thumbnail">
+	<video controls poster="{{ call .URL "/sha1/569f3a66fbd9a3d1e8c8a34724d6f17a792ccef0.png" }}" class="w-100 mb-3 img-thumbnail">
           <source src="https://www.dropbox.com/s/i9crerluragt2po/?raw=1" type="video/mp4">
             Sorry, your browser does not support embedded videos.
 	</video>
@@ -36,7 +40,7 @@
     </div>
     <div class="row">
       <div class="col-lg-6 offset-lg-3 col-12 text-center">
-	<video controls poster="{{ call .URL "/img/sha1/1ff5447258aa5b2b9bc093344ece49af9d1653d9.png" }}" class="w-100 mb-3 img-thumbnail">
+	<video controls poster="{{ call .URL "/sha1/1ff5447258aa5b2b9bc093344ece49af9d1653d9.png" }}" class="w-100 mb-3 img-thumbnail">
           <source src="https://www.dropbox.com/s/nfkix20l60iq9xq/?raw=1" type="video/mp4">
             Sorry, your browser does not support embedded videos.
 	</video>
