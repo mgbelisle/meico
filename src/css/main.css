@@ -32,18 +32,22 @@ footer {
 }
 
 :root {
-    --font-family-sans-serif: Garamond;
+    --font-family-sans-serif: Georgia;
 }
 
 body {
-    font-family: 'Shadows Into Light', Garamond;
+    font-family: Georgia;
 }
 
 .tooltip {
-    font-family: 'Shadows Into Light', Garamond;
+    font-family: Georgia;
 }
 
 .popover {
+    font-family: Georgia;
+}
+
+h1, h2, h3, h4, h5, h6, .nav-link {
     font-family: 'Shadows Into Light', Garamond;
 }
 
