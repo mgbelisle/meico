@@ -9,9 +9,8 @@
 {{ block "content" . }}
 <div class="my-5">
   <div class="col-lg-6 offset-lg-3 col-12">
-    <img src="{{ call .URL "/sha1/57a588155d2f463a19ab3b5f4c3a82c9e4c5981c.png" }}" alt="flyer" class="w-100 img-thumbnail">
+    <a href="{{ call .URL "/auditions" }}"><img src="{{ call .URL "/sha1/57a588155d2f463a19ab3b5f4c3a82c9e4c5981c.png" }}" alt="flyer" class="w-100 img-thumbnail"></a>
   </div>
-  <p class="text-center">For more information click <a href="{{ call .URL "/auditions" }}">here</a>.</p>
   <h2 class="text-center">Upcoming Events</h2>
   {{ template "events-future" . }}
   <a href="{{ call .URL "/about/mission/" }}"><h2>Our Mission</h2></a>
