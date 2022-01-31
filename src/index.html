@@ -8,6 +8,12 @@
 
 {{ block "content" . }}
 <div class="my-5">
+  <div class="col-lg-6 offset-lg-3 col-12 text-center">
+    <video controls poster="{{ call .URL "/sha1/2ef5558c507a2cbef78374c86464b017ff1c2604.png" }}" class="w-100 mb-3 img-thumbnail">
+      <source src="https://www.dropbox.com/s/0umn0ejldyop2f1?raw=1" type="video/mp4">
+        Sorry, your browser does not support embedded videos.
+    </video>
+  </div>
   <h2 class="text-center">Upcoming Events</h2>
   <div class="col-lg-6 offset-lg-3 col-12">
     <a href="{{ call .URL "/auditions" }}"><img src="{{ call .URL "/sha1/57a588155d2f463a19ab3b5f4c3a82c9e4c5981c.png" }}" alt="flyer" class="w-100 img-thumbnail"></a>
