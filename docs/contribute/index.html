@@ -411,6 +411,7 @@
         },
         requestPayerName: true,
         requestPayerEmail: true,
+        requestShipping: false,
       });
       const elements = stripe.elements();
       const paymentRequestButton = elements.create('paymentRequestButton', {
@@ -494,6 +495,7 @@
     });
   })();
 </script>
+1
 
   </body>
 </html>
