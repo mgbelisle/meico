@@ -11,7 +11,8 @@ import (
 func main() {
 	// Load configs
 	configs := struct {
-		StripeSecretKey string `json:"stripeSecretKey"`
+		StripeSecretKeyLive string `json:"stripeSecretKeyLive"`
+		StripeSecretKeyTest string `json:"stripeSecretKeyTest"`
 	}{}
 	configFile, err := os.Open("configs/prod.json")
 	if err != nil {
@@ -42,8 +43,12 @@ func main() {
 	http.HandleFunc("/stripe/v1/payment_intents", cors(func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case "POST":
+			secretKey := configs.StripeSecretKeyLive
+			if _, ok := r.URL.Query()["test"]; ok {
+				secretKey = configs.StripeSecretKeyTest
+			}
 			stripeReq, _ := http.NewRequest("POST", "https://api.stripe.com/v1/payment_intents", r.Body)
-			stripeReq.Header.Set("Authorization", "Bearer "+configs.StripeSecretKey)
+			stripeReq.Header.Set("Authorization", "Bearer "+secretKey)
 			if contentType := r.Header.Get("Content-Type"); contentType != "" {
 				stripeReq.Header.Set("Content-Type", contentType)
 			}
