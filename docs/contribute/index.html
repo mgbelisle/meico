@@ -335,7 +335,7 @@
   <p id="payment-request-button" class="payment-request">
     
   </p>
-  <div class="payment-request pb-3 d-none">
+  <div class="payment-request pb-3">
     <div class="input-group">
       <div class="input-group-prepend">
         <div class="input-group-text">
@@ -426,9 +426,6 @@
       
       if (await paymentRequest.canMakePayment()) {
         paymentRequestButton.mount('#payment-request-button');
-        Array.from(document.getElementsByClassName('payment-request')).forEach(e => {
-          e.style.display = 'block';
-        });
       } else {
         Array.from(document.getElementsByClassName('payment-request')).forEach(e => {
           e.style.display = 'none';
