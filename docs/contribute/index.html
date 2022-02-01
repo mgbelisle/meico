@@ -427,11 +427,11 @@
       
       if (await paymentRequest.canMakePayment()) {
         paymentRequestButton.mount('#payment-request-button');
-        document.getElementsByClassName('payment-request').forEach(e => {
+        Array.from(document.getElementsByClassName('payment-request')).forEach(e => {
           e.style.display = 'block';
         });
       } else {
-        document.getElementsByClassName('payment-request').forEach(e => {
+        Array.from(document.getElementsByClassName('payment-request')).forEach(e => {
           e.style.display = 'none';
         });
       }
