@@ -401,7 +401,6 @@
       apiVersion: "2020-08-27",
     });
     const postPaymentIntent = async (amount) => {
-      console.log(amount);
       amount = parseInt(amount);
       const paymentRequest = stripe.paymentRequest({
         country: 'US',
