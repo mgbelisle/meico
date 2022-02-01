@@ -12,11 +12,7 @@
   <script src="https://js.stripe.com/v3/"></script>
   <script>
     (async () => {
-      let publicKey = 'pk_live_51J8XRYEFDQQA3h4CJHL5RQvmTN4978U4nC55YRpqDnwfz1lP9nkknLlNk5XjO4k23WMCazo9wVYvmv2uhXUKcPka00i4afVlKG';
-      if (new URLSearchParams(window.location.search).has('test')) {
-        publicKey = 'pk_test_51J8XRYEFDQQA3h4C30s4aoHtdgN7MfmlWLdXxDtZX2vVkdEdDPM959JKRmwjSddZAPOneD4GtnUto9iNtDQXduEi00MUljgS0G';
-      }
-      const stripe = Stripe(publicKey, {
+      const stripe = Stripe('pk_test_51J8XRYEFDQQA3h4C30s4aoHtdgN7MfmlWLdXxDtZX2vVkdEdDPM959JKRmwjSddZAPOneD4GtnUto9iNtDQXduEi00MUljgS0G', {
         apiVersion: "2020-08-27",
       });
       const amount = 50;
@@ -43,7 +39,7 @@
         });
       }
       const resp = await (await fetch(
-        'https://jovial-evening-318521.appspot.com/stripe/v1/payment_intents'+window.location.search,
+        'https://jovial-evening-318521.appspot.com/stripe/v1/payment_intents?test',
         {
           'method': 'POST',
           'body': new URLSearchParams({
