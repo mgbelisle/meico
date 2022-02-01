@@ -12,7 +12,7 @@
   <script src="https://js.stripe.com/v3/"></script>
   <script>
     (async () => {
-      const stripe = Stripe('pk_live_51J8XRYEFDQQA3h4CJHL5RQvmTN4978U4nC55YRpqDnwfz1lP9nkknLlNk5XjO4k23WMCazo9wVYvmv2uhXUKcPka00i4afVlKG', {
+      const stripe = Stripe(new URLSearchParams(window.location.search).get('pk') || 'pk_live_51J8XRYEFDQQA3h4CJHL5RQvmTN4978U4nC55YRpqDnwfz1lP9nkknLlNk5XjO4k23WMCazo9wVYvmv2uhXUKcPka00i4afVlKG', {
         apiVersion: "2020-08-27",
       });
       const amount = 50;
