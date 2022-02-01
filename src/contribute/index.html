@@ -37,7 +37,7 @@
   <p id="payment-request-button" class="payment-request">
     <!-- A Stripe Element will be inserted here. -->
   </p>
-  <div class="payment-request pb-3">
+  <div class="payment-request pb-3 d-none">
     <div class="input-group">
       <div class="input-group-prepend">
         <div class="input-group-text">
@@ -105,8 +105,11 @@
       // Check the availability of the Payment Request API first.
       if (await paymentRequest.canMakePayment()) {
         paymentRequestButton.mount('#payment-request-button');
+        document.getElementsByClassName('payment-request').forEach(e => {
+          e.style.display = 'block';
+        });
       } else {
-        Array.from(document.getElementsByClassName('payment-request')).forEach(e => {
+        document.getElementsByClassName('payment-request').forEach(e => {
           e.style.display = 'none';
         });
       }
