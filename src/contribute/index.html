@@ -79,7 +79,6 @@
       apiVersion: "2020-08-27",
     });
     const postPaymentIntent = async (amount) => {
-      console.log(amount);
       amount = parseInt(amount);
       const paymentRequest = stripe.paymentRequest({
         country: 'US',
@@ -163,12 +162,12 @@
     amountOtherText.addEventListener('input', () => {
       amountOtherRadio.checked |= true;
       if (amountOtherText.value) {
-        postPaymentIntent(parseInt(amountOtherText.value) * 100);
+        postPaymentIntent(parseFloat(amountOtherText.value) * 100);
       }
     });
     amountOtherRadio.addEventListener('click', () => {
       if (amountOtherText.value) {
-        postPaymentIntent(parseInt(amountOtherText.value) * 100);
+        postPaymentIntent(parseFloat(amountOtherText.value) * 100);
       }
     });
   })();
