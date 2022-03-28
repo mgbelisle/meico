@@ -73,12 +73,12 @@
             // Let Stripe.js handle the rest of the payment flow.
             const { error } = await stripe.confirmCardPayment(clientSecret);
             if (error) {
-              alert(error);
+              console.log(error);
             } else {
-              alert('Thanks for your donation!');
+              console.log('Thanks for your donation!');
             }
           } else {
-            alert('Thanks for your donation!');
+            console.log('Thanks for your donation!');
           }
         }
       });
