@@ -48,7 +48,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6, .nav-link {
-    font-family: 'Shadows Into Light', Garamond;
+    font-family: 'Roboto Mono', monospace, Garamond;
 }
 
 .list-group-item {
