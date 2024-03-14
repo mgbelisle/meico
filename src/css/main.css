@@ -32,23 +32,23 @@ footer {
 }
 
 :root {
-    --font-family-sans-serif: Georgia;
+    --font-family-sans-serif: "Open Sans", sans-serif;
 }
 
 body {
-    font-family: Georgia;
+    font-family: "Open Sans", sans-serif;
 }
 
 .tooltip {
-    font-family: Georgia;
+    font-family: "Open Sans", sans-serif;
 }
 
 .popover {
-    font-family: Georgia;
+    font-family: "Open Sans", sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6, .nav-link {
-    font-family: 'Comfortaa', monospace, Garamond;
+    font-family: "Open Sans", sans-serif;
 }
 
 .list-group-item {
