@@ -14,13 +14,7 @@
 	},
 	{
 		"url": "/contribute/",
-		"text": "Contribute",
-		"children": [
-			{
-				"url": "/contribute/",
-				"text": "Donations"
-			}
-		]
+		"text": "Contribute"
 	},
 	{
 		"url": "/contact/",
